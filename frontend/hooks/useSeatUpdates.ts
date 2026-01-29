@@ -3,7 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useWebSocket } from './useWebSocket';
 import { WebSocketMessage, Seat } from '@/lib/types';
 
-const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8080/ws';
+const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:3000/ws';
 
 export const useSeatUpdates = (eventId: string) => {
   const queryClient = useQueryClient();

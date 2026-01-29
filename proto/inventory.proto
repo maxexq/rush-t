@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package inventory;
 
+option go_package = "core-service/pkg/proto/inventory";
+
 service InventoryService {
   rpc SetEventQuota(SetQuotaRequest) returns (SetQuotaResponse);
 }

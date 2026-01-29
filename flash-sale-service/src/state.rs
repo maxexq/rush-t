@@ -20,7 +20,7 @@ impl AppState {
         let redis_cfg = RedisConfig::from_url(config.redis_url.clone());
         let redis_pool = redis_cfg
             .create_pool(Some(Runtime::Tokio1))
-            .map_err(|e| crate::errors::AppError::Redis(e))?;
+            .map_err(|e| crate::errors::AppError::RedisPoolCreate(e.to_string()))?;
 
         // Kafka producer
         let kafka_producer: FutureProducer = ClientConfig::new()

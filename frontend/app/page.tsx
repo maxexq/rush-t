@@ -1,62 +1,21 @@
+'use client';
+
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { EventCard } from "@/components/event-card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Ticket, Shield, Zap, Clock } from "lucide-react";
-
-// Mock featured events for homepage - in production, fetch from API
-const mockFeaturedEvents = [
-  {
-    id: "1",
-    title: "Taylor Swift - Eras Tour",
-    description: "Experience the magic of Taylor Swift's record-breaking Eras Tour.",
-    date: "2026-03-15",
-    time: "19:00",
-    venue: "Madison Square Garden",
-    city: "New York",
-    price: 150,
-    original_price: 200,
-    category: "Music",
-    type: "concert" as const,
-    available_tickets: 245,
-    total_tickets: 20000,
-    artists: ["Taylor Swift"],
-  },
-  {
-    id: "2",
-    title: "Tech Conference 2026",
-    description: "Join thousands of developers for the biggest tech conference.",
-    date: "2026-04-20",
-    time: "09:00",
-    venue: "Moscone Center",
-    city: "San Francisco",
-    price: 350,
-    category: "Conference",
-    type: "general" as const,
-    available_tickets: 1200,
-    total_tickets: 5000,
-  },
-  {
-    id: "3",
-    title: "Coldplay - Music of the Spheres",
-    description: "Coldplay brings their spectacular tour.",
-    date: "2026-05-10",
-    time: "20:00",
-    venue: "Wembley Stadium",
-    city: "London",
-    price: 120,
-    original_price: 150,
-    category: "Music",
-    type: "concert" as const,
-    available_tickets: 890,
-    total_tickets: 90000,
-    artists: ["Coldplay"],
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { getEvents } from "@/services/eventService";
 
 export default function HomePage() {
-  const featuredEvents = mockFeaturedEvents;
-  const upcomingConcerts = mockFeaturedEvents.filter((e) => e.type === "concert");
+  const { data: allEvents = [] } = useQuery({
+    queryKey: ['events'],
+    queryFn: () => getEvents(),
+  });
+
+  const featuredEvents = allEvents.slice(0, 3);
+  const upcomingConcerts = allEvents.filter((e) => e.type === "concert").slice(0, 3);
 
   return (
     <>

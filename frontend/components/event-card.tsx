@@ -17,9 +17,11 @@ export function EventCard({ event }: EventCardProps) {
     year: "numeric",
   });
 
-  const ticketPercentage = Math.round(
-    (event.available_tickets / event.total_tickets) * 100
-  );
+  const availableTickets = event.available_tickets ?? 0;
+  const totalTickets = event.total_tickets ?? 0;
+  const ticketPercentage = totalTickets > 0 
+    ? Math.round((availableTickets / totalTickets) * 100)
+    : 0;
   const isLowStock = ticketPercentage < 10;
 
   return (
@@ -61,7 +63,7 @@ export function EventCard({ event }: EventCardProps) {
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <MapPin className="h-4 w-4 flex-shrink-0" />
             <span className="truncate">
-              {event.venue}, {event.city}
+              {typeof event.venue === 'string' ? event.venue : event.venue.name}, {event.city}
             </span>
           </div>
         </div>
@@ -75,7 +77,7 @@ export function EventCard({ event }: EventCardProps) {
                 isLowStock ? "text-destructive" : "text-muted-foreground"
               )}
             >
-              {event.available_tickets.toLocaleString()} left
+              {(availableTickets || 0)?.toLocaleString()} left
             </span>
           </div>
           <div className="text-right">

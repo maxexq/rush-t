@@ -6,11 +6,11 @@ WORKDIR /app
 RUN apk add --no-cache git
 
 # Copy go mod files
-COPY go.mod go.sum ./
+COPY logger-service/go.mod logger-service/go.sum ./
 RUN go mod download
 
 # Copy source code
-COPY . .
+COPY logger-service/ .
 
 # Build
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o logger-service ./cmd/consumer
