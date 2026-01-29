@@ -1,0 +1,1355 @@
+time="2026-01-30T02:21:52+07:00" level=warning msg="E:\\Dev\\rush-t\\deployments\\docker-compose.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image deployments-ingestion-service Building 
+ Image deployments-flash-sale-service Building 
+ Image deployments-logger-service Building 
+ Image deployments-core-service Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.99kB done
+#1 DONE 0.0s
+
+#2 [core-service internal] load build definition from Dockerfile
+#2 transferring dockerfile: 307B done
+#2 DONE 0.0s
+
+#3 [ingestion-service internal] load build definition from Dockerfile
+#3 transferring dockerfile: 910B done
+#3 WARN: FromAsCasing: 'as' and 'FROM' keywords' casing do not match (line 2)
+#3 DONE 0.1s
+
+#4 [logger-service internal] load build definition from Dockerfile
+#4 transferring dockerfile: 609B done
+#4 DONE 0.1s
+
+#5 [flash-sale-service internal] load build definition from Dockerfile
+#5 transferring dockerfile: 832B done
+#5 DONE 0.1s
+
+#6 [ingestion-service internal] load metadata for docker.io/rustlang/rust:nightly-slim
+#6 ...
+
+#7 [core-service internal] load metadata for docker.io/library/alpine:latest
+#7 DONE 1.7s
+
+#8 [flash-sale-service internal] load metadata for docker.io/library/debian:bookworm-slim
+#8 DONE 1.9s
+
+#9 [core-service internal] load metadata for docker.io/library/golang:1.21-alpine
+#9 DONE 2.0s
+
+#10 [core-service internal] load .dockerignore
+#10 transferring context: 2B done
+#10 DONE 0.0s
+
+#11 [logger-service internal] load .dockerignore
+#11 transferring context: 93B done
+#11 DONE 0.1s
+
+#12 [core-service builder 1/6] FROM docker.io/library/golang:1.21-alpine@sha256:2414035b086e3c42b99654c8b26e6f5b1b1598080d65fd03c7f499552ff4dc94
+#12 resolve docker.io/library/golang:1.21-alpine@sha256:2414035b086e3c42b99654c8b26e6f5b1b1598080d65fd03c7f499552ff4dc94 0.1s done
+#12 DONE 0.1s
+
+#13 [core-service builder 2/6] WORKDIR /app
+#13 CACHED
+
+#14 [core-service stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
+#14 resolve docker.io/library/alpine:latest@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 0.1s done
+#14 CACHED
+
+#15 [core-service internal] load build context
+#15 transferring context: 858B done
+#15 DONE 0.0s
+
+#16 [logger-service stage-1 2/5] RUN apk --no-cache add ca-certificates tzdata
+#16 ...
+
+#17 [core-service builder 6/6] RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/server
+#17 CACHED
+
+#18 [core-service stage-1 2/3] WORKDIR /app
+#18 CACHED
+
+#19 [core-service builder 4/6] RUN go mod download
+#19 CACHED
+
+#20 [core-service builder 3/6] COPY go.mod go.sum ./
+#20 CACHED
+
+#21 [core-service builder 5/6] COPY . .
+#21 CACHED
+
+#22 [core-service stage-1 3/3] COPY --from=builder /app/server .
+#22 CACHED
+
+#23 [logger-service internal] load build context
+#23 transferring context: 27.58kB done
+#23 DONE 0.1s
+
+#24 [core-service] exporting to image
+#24 exporting layers done
+#24 exporting manifest sha256:eb28cd03543cef2ba9b097590ad7e915e078ddd437084739be4e4d7dcee48bea 0.0s done
+#24 exporting config sha256:c79acd40e23c34995b640b198717310daeb8e4c7431dcf6322a83f2991ae8865 0.0s done
+#24 exporting attestation manifest sha256:62fc9a17c1e40edcf25e3b52351e48c7f97a3dcf30e6922e9b1ca4d6c378c542 0.1s done
+#24 exporting manifest list sha256:705e7c22b6b5328864656ae8df2e4da89ad750959f012f00b59e8f2e51f5b47a 0.0s done
+#24 naming to docker.io/library/deployments-core-service:latest done
+#24 unpacking to docker.io/library/deployments-core-service:latest done
+#24 DONE 0.2s
+
+#25 [core-service] resolving provenance for metadata file
+#25 DONE 0.0s
+
+#6 [flash-sale-service internal] load metadata for docker.io/rustlang/rust:nightly-slim
+#6 DONE 2.6s
+
+#26 [ingestion-service internal] load .dockerignore
+#26 transferring context: 2B done
+#26 DONE 0.0s
+
+#27 [flash-sale-service internal] load .dockerignore
+#27 transferring context: 2B done
+#27 DONE 0.0s
+
+#28 [ingestion-service stage-1 1/5] FROM docker.io/library/debian:bookworm-slim@sha256:56ff6d36d4eb3db13a741b342ec466f121480b5edded42e4b7ee850ce7a418ee
+#28 resolve docker.io/library/debian:bookworm-slim@sha256:56ff6d36d4eb3db13a741b342ec466f121480b5edded42e4b7ee850ce7a418ee 0.1s done
+#28 DONE 0.1s
+
+#29 [ingestion-service stage-1 2/5] RUN apt-get update && apt-get install -y     ca-certificates     libssl3     && rm -rf /var/lib/apt/lists/*
+#29 CACHED
+
+#30 [ingestion-service stage-1 3/5] WORKDIR /app
+#30 CACHED
+
+#29 [flash-sale-service stage-1 2/5] RUN apt-get update && apt-get install -y     ca-certificates     libssl3     && rm -rf /var/lib/apt/lists/*
+#29 CACHED
+
+#31 [flash-sale-service internal] load build context
+#31 transferring context: 253B done
+#31 DONE 0.1s
+
+#32 [ingestion-service internal] load build context
+#32 transferring context: 256B done
+#32 DONE 0.1s
+
+#33 [flash-sale-service builder 1/6] FROM docker.io/rustlang/rust:nightly-slim@sha256:40be3148cc908ae829f539dd0d0d2b9e0a7e12b3a2ca1fc9d9c4036e5c465c4d
+#33 resolve docker.io/rustlang/rust:nightly-slim@sha256:40be3148cc908ae829f539dd0d0d2b9e0a7e12b3a2ca1fc9d9c4036e5c465c4d 0.1s done
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 0B / 290.46MB 0.2s
+#33 ...
+
+#16 [logger-service stage-1 2/5] RUN apk --no-cache add ca-certificates tzdata
+#16 1.461 (1/2) Installing ca-certificates (20251003-r0)
+#16 1.507 (2/2) Installing tzdata (2025c-r0)
+#16 1.730 Executing busybox-1.37.0-r30.trigger
+#16 1.735 Executing ca-certificates-20251003-r0.trigger
+#16 1.776 OK: 8909 KiB in 18 packages
+#16 DONE 1.8s
+
+#33 [flash-sale-service builder 1/6] FROM docker.io/rustlang/rust:nightly-slim@sha256:40be3148cc908ae829f539dd0d0d2b9e0a7e12b3a2ca1fc9d9c4036e5c465c4d
+#33 ...
+
+#34 [logger-service stage-1 3/5] WORKDIR /root/
+#34 DONE 0.1s
+
+#35 [logger-service builder 3/7] RUN apk add --no-cache git
+#35 0.543 fetch https://dl-cdn.alpinelinux.org/alpine/v3.20/main/x86_64/APKINDEX.tar.gz
+#35 0.933 fetch https://dl-cdn.alpinelinux.org/alpine/v3.20/community/x86_64/APKINDEX.tar.gz
+#35 1.409 (1/12) Installing brotli-libs (1.1.0-r2)
+#35 1.457 (2/12) Installing c-ares (1.33.1-r0)
+#35 1.472 (3/12) Installing libunistring (1.2-r0)
+#35 1.522 (4/12) Installing libidn2 (2.3.7-r0)
+#35 1.540 (5/12) Installing nghttp2-libs (1.62.1-r0)
+#35 1.579 (6/12) Installing libpsl (0.21.5-r1)
+#35 1.589 (7/12) Installing zstd-libs (1.5.6-r0)
+#35 1.628 (8/12) Installing libcurl (8.14.1-r2)
+#35 1.649 (9/12) Installing libexpat (2.7.3-r0)
+#35 1.660 (10/12) Installing pcre2 (10.43-r0)
+#35 1.683 (11/12) Installing git (2.45.4-r0)
+#35 1.852 (12/12) Installing git-init-template (2.45.4-r0)
+#35 1.865 Executing busybox-1.36.1-r29.trigger
+#35 1.872 OK: 20 MiB in 27 packages
+#35 DONE 1.9s
+
+#33 [flash-sale-service builder 1/6] FROM docker.io/rustlang/rust:nightly-slim@sha256:40be3148cc908ae829f539dd0d0d2b9e0a7e12b3a2ca1fc9d9c4036e5c465c4d
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 19.92MB / 290.46MB 1.4s
+#33 ...
+
+#36 [logger-service builder 4/7] COPY go.mod go.sum ./
+#36 DONE 0.1s
+
+#33 [flash-sale-service builder 1/6] FROM docker.io/rustlang/rust:nightly-slim@sha256:40be3148cc908ae829f539dd0d0d2b9e0a7e12b3a2ca1fc9d9c4036e5c465c4d
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 34.60MB / 290.46MB 2.3s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 50.33MB / 290.46MB 3.2s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 66.06MB / 290.46MB 3.8s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 81.79MB / 290.46MB 4.4s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 97.52MB / 290.46MB 5.3s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 113.25MB / 290.46MB 5.9s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 127.93MB / 290.46MB 6.5s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 143.65MB / 290.46MB 7.1s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 160.43MB / 290.46MB 7.7s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 177.21MB / 290.46MB 8.3s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 195.04MB / 290.46MB 9.0s
+#33 ...
+
+#37 [logger-service builder 5/7] RUN go mod download
+#37 DONE 7.9s
+
+#33 [flash-sale-service builder 1/6] FROM docker.io/rustlang/rust:nightly-slim@sha256:40be3148cc908ae829f539dd0d0d2b9e0a7e12b3a2ca1fc9d9c4036e5c465c4d
+#33 ...
+
+#38 [logger-service builder 6/7] COPY . .
+#38 DONE 0.1s
+
+#33 [flash-sale-service builder 1/6] FROM docker.io/rustlang/rust:nightly-slim@sha256:40be3148cc908ae829f539dd0d0d2b9e0a7e12b3a2ca1fc9d9c4036e5c465c4d
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 209.72MB / 290.46MB 9.8s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 225.44MB / 290.46MB 10.5s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 242.22MB / 290.46MB 11.3s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 257.95MB / 290.46MB 11.9s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 272.63MB / 290.46MB 12.6s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 287.31MB / 290.46MB 13.5s
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 290.46MB / 290.46MB 13.6s done
+#33 sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 290.46MB / 290.46MB 13.6s done
+#33 extracting sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33
+#33 ...
+
+#39 [logger-service builder 7/7] RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o logger-service ./cmd/consumer
+#39 DONE 7.4s
+
+#40 [logger-service stage-1 4/5] COPY --from=builder /app/logger-service .
+#40 DONE 0.1s
+
+#33 [ingestion-service builder 1/6] FROM docker.io/rustlang/rust:nightly-slim@sha256:40be3148cc908ae829f539dd0d0d2b9e0a7e12b3a2ca1fc9d9c4036e5c465c4d
+#33 ...
+
+#41 [logger-service stage-1 5/5] COPY --from=builder /app/config.yaml .
+#41 DONE 0.1s
+
+#42 [logger-service] exporting to image
+#42 exporting layers
+#42 ...
+
+#33 [ingestion-service builder 1/6] FROM docker.io/rustlang/rust:nightly-slim@sha256:40be3148cc908ae829f539dd0d0d2b9e0a7e12b3a2ca1fc9d9c4036e5c465c4d
+#33 extracting sha256:a2e860334356e33f7d768dccdc805559df1524d02d79c158ba2a3e63b1769f33 3.6s done
+#33 DONE 17.4s
+
+#43 [ingestion-service builder 2/6] RUN apt-get update && apt-get install -y     cmake     g++     libssl-dev     pkg-config     && rm -rf /var/lib/apt/lists/*
+#43 0.543 Get:1 http://deb.debian.org/debian trixie InRelease [140 kB]
+#43 0.562 Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+#43 0.571 Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+#43 0.591 Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+#43 ...
+
+#42 [logger-service] exporting to image
+#42 exporting layers 0.6s done
+#42 exporting manifest sha256:4235ea6b487008730ce563c678f2a59e68f663a20275d4d019de2fb38f323e11 0.0s done
+#42 exporting config sha256:c64bdd992455a96fce97c2d515d870bca3740f29c6f0f72cb39681c8cf6bf662 0.0s done
+#42 exporting attestation manifest sha256:2b104dff0994e54a1420d3ac097eec5b5f864955a5c8020d947f41e5af76f4f1 0.0s done
+#42 exporting manifest list sha256:1dee2268c9dae5d0cfa176550da161fbcac31fb4c195d9ed24dd32a52619c4e9 0.0s done
+#42 naming to docker.io/library/deployments-logger-service:latest done
+#42 unpacking to docker.io/library/deployments-logger-service:latest 0.3s done
+#42 DONE 1.1s
+
+#44 [logger-service] resolving provenance for metadata file
+#44 DONE 0.0s
+
+#43 [ingestion-service builder 2/6] RUN apt-get update && apt-get install -y     cmake     g++     libssl-dev     pkg-config     && rm -rf /var/lib/apt/lists/*
+#43 0.967 Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+#43 0.968 Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [98.2 kB]
+#43 1.518 Fetched 10.0 MB in 1s (8240 kB/s)
+#43 1.518 Reading package lists...
+#43 1.936 Reading package lists...
+#43 2.307 Building dependency tree...
+#43 2.413 Reading state information...
+#43 2.548 The following additional packages will be installed:
+#43 2.548   cmake-data g++-14 g++-14-x86-64-linux-gnu g++-x86-64-linux-gnu krb5-locales
+#43 2.548   libarchive13t64 libbrotli1 libcom-err2 libcurl4t64 libexpat1 libffi8
+#43 2.548   libgnutls30t64 libgpm2 libgssapi-krb5-2 libjsoncpp26 libk5crypto3
+#43 2.548   libkeyutils1 libkrb5-3 libkrb5support0 libldap-common libldap2 libncursesw6
+#43 2.548   libnghttp2-14 libnghttp3-9 libp11-kit0 libpkgconf3 libproc2-0 libpsl5t64
+#43 2.549   librhash1 librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db
+#43 2.549   libssh2-1t64 libstdc++-14-dev libtasn1-6 libuv1t64 libxml2
+#43 2.549   linux-sysctl-defaults make pkgconf pkgconf-bin procps psmisc publicsuffix
+#43 2.550 Suggested packages:
+#43 2.550   cmake-doc cmake-format elpa-cmake-mode ninja-build g++-multilib
+#43 2.550   g++-14-multilib gcc-14-doc lrzip gnutls-bin gpm krb5-doc krb5-user
+#43 2.550   libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal
+#43 2.550   libsasl2-modules-ldap libsasl2-modules-otp libsasl2-modules-sql libssl-doc
+#43 2.550   libstdc++-14-doc make-doc
+#43 2.754 The following NEW packages will be installed:
+#43 2.754   cmake cmake-data g++ g++-14 g++-14-x86-64-linux-gnu g++-x86-64-linux-gnu
+#43 2.754   krb5-locales libarchive13t64 libbrotli1 libcom-err2 libcurl4t64 libexpat1
+#43 2.754   libffi8 libgnutls30t64 libgpm2 libgssapi-krb5-2 libjsoncpp26 libk5crypto3
+#43 2.754   libkeyutils1 libkrb5-3 libkrb5support0 libldap-common libldap2 libncursesw6
+#43 2.754   libnghttp2-14 libnghttp3-9 libp11-kit0 libpkgconf3 libproc2-0 libpsl5t64
+#43 2.754   librhash1 librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db
+#43 2.754   libssh2-1t64 libssl-dev libstdc++-14-dev libtasn1-6 libuv1t64 libxml2
+#43 2.755   linux-sysctl-defaults make pkg-config pkgconf pkgconf-bin procps psmisc
+#43 2.755   publicsuffix
+#43 2.789 0 upgraded, 49 newly installed, 0 to remove and 0 not upgraded.
+#43 2.789 Need to get 39.7 MB of archives.
+#43 2.789 After this operation, 155 MB of additional disk space will be used.
+#43 2.789 Get:1 http://deb.debian.org/debian trixie/main amd64 libexpat1 amd64 2.7.1-2 [108 kB]
+#43 2.808 Get:2 http://deb.debian.org/debian trixie/main amd64 linux-sysctl-defaults all 4.12 [5624 B]
+#43 2.817 Get:3 http://deb.debian.org/debian trixie/main amd64 libncursesw6 amd64 6.5+20250216-2 [135 kB]
+#43 2.837 Get:4 http://deb.debian.org/debian trixie/main amd64 libproc2-0 amd64 2:4.0.4-9 [65.6 kB]
+#43 2.847 Get:5 http://deb.debian.org/debian trixie/main amd64 procps amd64 2:4.0.4-9 [882 kB]
+#43 2.901 Get:6 http://deb.debian.org/debian trixie/main amd64 krb5-locales all 1.21.3-5 [101 kB]
+#43 2.904 Get:7 http://deb.debian.org/debian trixie/main amd64 cmake-data all 3.31.6-2 [2268 kB]
+#43 3.039 Get:8 http://deb.debian.org/debian trixie/main amd64 libxml2 amd64 2.12.7+dfsg+really2.9.14-2.1+deb13u2 [698 kB]
+#43 3.091 Get:9 http://deb.debian.org/debian trixie/main amd64 libarchive13t64 amd64 3.7.4-4 [349 kB]
+#43 3.119 Get:10 http://deb.debian.org/debian trixie/main amd64 libbrotli1 amd64 1.1.0-2+b7 [307 kB]
+#43 3.131 Get:11 http://deb.debian.org/debian trixie/main amd64 libkrb5support0 amd64 1.21.3-5 [33.0 kB]
+#43 3.131 Get:12 http://deb.debian.org/debian trixie/main amd64 libcom-err2 amd64 1.47.2-3+b7 [25.0 kB]
+#43 3.132 Get:13 http://deb.debian.org/debian trixie/main amd64 libk5crypto3 amd64 1.21.3-5 [81.5 kB]
+#43 3.135 Get:14 http://deb.debian.org/debian trixie/main amd64 libkeyutils1 amd64 1.6.3-6 [9456 B]
+#43 3.135 Get:15 http://deb.debian.org/debian trixie/main amd64 libkrb5-3 amd64 1.21.3-5 [326 kB]
+#43 3.142 Get:16 http://deb.debian.org/debian trixie/main amd64 libgssapi-krb5-2 amd64 1.21.3-5 [138 kB]
+#43 3.145 Get:17 http://deb.debian.org/debian trixie/main amd64 libsasl2-modules-db amd64 2.1.28+dfsg1-9 [19.8 kB]
+#43 3.145 Get:18 http://deb.debian.org/debian trixie/main amd64 libsasl2-2 amd64 2.1.28+dfsg1-9 [57.5 kB]
+#43 3.146 Get:19 http://deb.debian.org/debian trixie/main amd64 libldap2 amd64 2.6.10+dfsg-1 [194 kB]
+#43 3.150 Get:20 http://deb.debian.org/debian trixie/main amd64 libnghttp2-14 amd64 1.64.0-1.1 [76.0 kB]
+#43 3.152 Get:21 http://deb.debian.org/debian trixie/main amd64 libnghttp3-9 amd64 1.8.0-1 [67.7 kB]
+#43 3.154 Get:22 http://deb.debian.org/debian trixie/main amd64 libpsl5t64 amd64 0.21.2-1.1+b1 [57.2 kB]
+#43 3.159 Get:23 http://deb.debian.org/debian trixie/main amd64 libffi8 amd64 3.4.8-2 [24.1 kB]
+#43 3.160 Get:24 http://deb.debian.org/debian trixie/main amd64 libp11-kit0 amd64 0.25.5-3 [425 kB]
+#43 3.184 Get:25 http://deb.debian.org/debian trixie/main amd64 libtasn1-6 amd64 4.20.0-2 [49.9 kB]
+#43 3.188 Get:26 http://deb.debian.org/debian trixie/main amd64 libgnutls30t64 amd64 3.8.9-3+deb13u1 [1466 kB]
+#43 3.294 Get:27 http://deb.debian.org/debian trixie/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2+b5 [58.8 kB]
+#43 3.298 Get:28 http://deb.debian.org/debian trixie/main amd64 libssh2-1t64 amd64 1.11.1-1 [245 kB]
+#43 3.316 Get:29 http://deb.debian.org/debian trixie/main amd64 libcurl4t64 amd64 8.14.1-2+deb13u2 [391 kB]
+#43 3.340 Get:30 http://deb.debian.org/debian trixie/main amd64 libjsoncpp26 amd64 1.9.6-3 [81.7 kB]
+#43 3.344 Get:31 http://deb.debian.org/debian trixie/main amd64 librhash1 amd64 1.4.5-1 [132 kB]
+#43 3.354 Get:32 http://deb.debian.org/debian trixie/main amd64 libuv1t64 amd64 1.50.0-2 [154 kB]
+#43 3.359 Get:33 http://deb.debian.org/debian trixie/main amd64 cmake amd64 3.31.6-2 [12.0 MB]
+#43 4.138 Get:34 http://deb.debian.org/debian trixie/main amd64 libstdc++-14-dev amd64 14.2.0-19 [2376 kB]
+#43 4.300 Get:35 http://deb.debian.org/debian trixie/main amd64 g++-14-x86-64-linux-gnu amd64 14.2.0-19 [12.1 MB]
+#43 5.135 Get:36 http://deb.debian.org/debian trixie/main amd64 g++-14 amd64 14.2.0-19 [22.5 kB]
+#43 5.136 Get:37 http://deb.debian.org/debian trixie/main amd64 g++-x86-64-linux-gnu amd64 4:14.2.0-1 [1200 B]
+#43 5.136 Get:38 http://deb.debian.org/debian trixie/main amd64 g++ amd64 4:14.2.0-1 [1344 B]
+#43 5.136 Get:39 http://deb.debian.org/debian trixie/main amd64 libgpm2 amd64 1.20.7-11+b2 [14.4 kB]
+#43 5.137 Get:40 http://deb.debian.org/debian trixie/main amd64 libldap-common all 2.6.10+dfsg-1 [35.1 kB]
+#43 5.139 Get:41 http://deb.debian.org/debian trixie/main amd64 libpkgconf3 amd64 1.8.1-4 [36.4 kB]
+#43 5.142 Get:42 http://deb.debian.org/debian trixie/main amd64 libsasl2-modules amd64 2.1.28+dfsg1-9 [66.7 kB]
+#43 5.147 Get:43 http://deb.debian.org/debian-security trixie-security/main amd64 libssl-dev amd64 3.5.4-1~deb13u2 [2958 kB]
+#43 5.336 Get:44 http://deb.debian.org/debian trixie/main amd64 make amd64 4.4.1-2 [463 kB]
+#43 5.345 Get:45 http://deb.debian.org/debian trixie/main amd64 pkgconf-bin amd64 1.8.1-4 [30.2 kB]
+#43 5.346 Get:46 http://deb.debian.org/debian trixie/main amd64 pkgconf amd64 1.8.1-4 [26.2 kB]
+#43 5.346 Get:47 http://deb.debian.org/debian trixie/main amd64 pkg-config amd64 1.8.1-4 [14.0 kB]
+#43 5.346 Get:48 http://deb.debian.org/debian trixie/main amd64 psmisc amd64 23.7-2 [267 kB]
+#43 5.354 Get:49 http://deb.debian.org/debian trixie/main amd64 publicsuffix all 20250328.1952-0.1 [296 kB]
+#43 5.492 debconf: unable to initialize frontend: Dialog
+#43 5.492 debconf: (TERM is not set, so the dialog frontend is not usable.)
+#43 5.492 debconf: falling back to frontend: Readline
+#43 5.493 debconf: unable to initialize frontend: Readline
+#43 5.493 debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 49.)
+#43 5.493 debconf: falling back to frontend: Teletype
+#43 5.497 debconf: unable to initialize frontend: Teletype
+#43 5.497 debconf: (This frontend requires a controlling tty.)
+#43 5.497 debconf: falling back to frontend: Noninteractive
+#43 6.356 Fetched 39.7 MB in 3s (15.3 MB/s)
+#43 6.390 Selecting previously unselected package libexpat1:amd64.
+#43 6.390 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 9595 files and directories currently installed.)
+#43 6.407 Preparing to unpack .../00-libexpat1_2.7.1-2_amd64.deb ...
+#43 6.421 Unpacking libexpat1:amd64 (2.7.1-2) ...
+#43 6.466 Selecting previously unselected package linux-sysctl-defaults.
+#43 6.467 Preparing to unpack .../01-linux-sysctl-defaults_4.12_all.deb ...
+#43 6.474 Unpacking linux-sysctl-defaults (4.12) ...
+#43 6.526 Selecting previously unselected package libncursesw6:amd64.
+#43 6.527 Preparing to unpack .../02-libncursesw6_6.5+20250216-2_amd64.deb ...
+#43 6.534 Unpacking libncursesw6:amd64 (6.5+20250216-2) ...
+#43 6.585 Selecting previously unselected package libproc2-0:amd64.
+#43 6.586 Preparing to unpack .../03-libproc2-0_2%3a4.0.4-9_amd64.deb ...
+#43 6.592 Unpacking libproc2-0:amd64 (2:4.0.4-9) ...
+#43 6.653 Selecting previously unselected package procps.
+#43 6.654 Preparing to unpack .../04-procps_2%3a4.0.4-9_amd64.deb ...
+#43 6.666 Unpacking procps (2:4.0.4-9) ...
+#43 6.738 Selecting previously unselected package krb5-locales.
+#43 6.738 Preparing to unpack .../05-krb5-locales_1.21.3-5_all.deb ...
+#43 6.745 Unpacking krb5-locales (1.21.3-5) ...
+#43 6.804 Selecting previously unselected package cmake-data.
+#43 6.805 Preparing to unpack .../06-cmake-data_3.31.6-2_all.deb ...
+#43 6.815 Unpacking cmake-data (3.31.6-2) ...
+#43 7.155 Selecting previously unselected package libxml2:amd64.
+#43 7.157 Preparing to unpack .../07-libxml2_2.12.7+dfsg+really2.9.14-2.1+deb13u2_amd64.deb ...
+#43 7.164 Unpacking libxml2:amd64 (2.12.7+dfsg+really2.9.14-2.1+deb13u2) ...
+#43 7.234 Selecting previously unselected package libarchive13t64:amd64.
+#43 7.235 Preparing to unpack .../08-libarchive13t64_3.7.4-4_amd64.deb ...
+#43 7.241 Unpacking libarchive13t64:amd64 (3.7.4-4) ...
+#43 7.301 Selecting previously unselected package libbrotli1:amd64.
+#43 7.302 Preparing to unpack .../09-libbrotli1_1.1.0-2+b7_amd64.deb ...
+#43 7.309 Unpacking libbrotli1:amd64 (1.1.0-2+b7) ...
+#43 7.367 Selecting previously unselected package libkrb5support0:amd64.
+#43 7.368 Preparing to unpack .../10-libkrb5support0_1.21.3-5_amd64.deb ...
+#43 7.375 Unpacking libkrb5support0:amd64 (1.21.3-5) ...
+#43 7.426 Selecting previously unselected package libcom-err2:amd64.
+#43 7.427 Preparing to unpack .../11-libcom-err2_1.47.2-3+b7_amd64.deb ...
+#43 7.434 Unpacking libcom-err2:amd64 (1.47.2-3+b7) ...
+#43 7.490 Selecting previously unselected package libk5crypto3:amd64.
+#43 7.491 Preparing to unpack .../12-libk5crypto3_1.21.3-5_amd64.deb ...
+#43 7.499 Unpacking libk5crypto3:amd64 (1.21.3-5) ...
+#43 7.550 Selecting previously unselected package libkeyutils1:amd64.
+#43 7.551 Preparing to unpack .../13-libkeyutils1_1.6.3-6_amd64.deb ...
+#43 7.558 Unpacking libkeyutils1:amd64 (1.6.3-6) ...
+#43 7.606 Selecting previously unselected package libkrb5-3:amd64.
+#43 7.607 Preparing to unpack .../14-libkrb5-3_1.21.3-5_amd64.deb ...
+#43 7.615 Unpacking libkrb5-3:amd64 (1.21.3-5) ...
+#43 7.681 Selecting previously unselected package libgssapi-krb5-2:amd64.
+#43 7.682 Preparing to unpack .../15-libgssapi-krb5-2_1.21.3-5_amd64.deb ...
+#43 7.689 Unpacking libgssapi-krb5-2:amd64 (1.21.3-5) ...
+#43 7.732 Selecting previously unselected package libsasl2-modules-db:amd64.
+#43 7.733 Preparing to unpack .../16-libsasl2-modules-db_2.1.28+dfsg1-9_amd64.deb ...
+#43 7.740 Unpacking libsasl2-modules-db:amd64 (2.1.28+dfsg1-9) ...
+#43 7.786 Selecting previously unselected package libsasl2-2:amd64.
+#43 7.787 Preparing to unpack .../17-libsasl2-2_2.1.28+dfsg1-9_amd64.deb ...
+#43 7.794 Unpacking libsasl2-2:amd64 (2.1.28+dfsg1-9) ...
+#43 7.844 Selecting previously unselected package libldap2:amd64.
+#43 7.845 Preparing to unpack .../18-libldap2_2.6.10+dfsg-1_amd64.deb ...
+#43 7.852 Unpacking libldap2:amd64 (2.6.10+dfsg-1) ...
+#43 7.907 Selecting previously unselected package libnghttp2-14:amd64.
+#43 7.908 Preparing to unpack .../19-libnghttp2-14_1.64.0-1.1_amd64.deb ...
+#43 7.915 Unpacking libnghttp2-14:amd64 (1.64.0-1.1) ...
+#43 7.966 Selecting previously unselected package libnghttp3-9:amd64.
+#43 7.968 Preparing to unpack .../20-libnghttp3-9_1.8.0-1_amd64.deb ...
+#43 7.974 Unpacking libnghttp3-9:amd64 (1.8.0-1) ...
+#43 8.025 Selecting previously unselected package libpsl5t64:amd64.
+#43 8.026 Preparing to unpack .../21-libpsl5t64_0.21.2-1.1+b1_amd64.deb ...
+#43 8.033 Unpacking libpsl5t64:amd64 (0.21.2-1.1+b1) ...
+#43 8.082 Selecting previously unselected package libffi8:amd64.
+#43 8.083 Preparing to unpack .../22-libffi8_3.4.8-2_amd64.deb ...
+#43 8.090 Unpacking libffi8:amd64 (3.4.8-2) ...
+#43 8.139 Selecting previously unselected package libp11-kit0:amd64.
+#43 8.140 Preparing to unpack .../23-libp11-kit0_0.25.5-3_amd64.deb ...
+#43 8.146 Unpacking libp11-kit0:amd64 (0.25.5-3) ...
+#43 8.205 Selecting previously unselected package libtasn1-6:amd64.
+#43 8.206 Preparing to unpack .../24-libtasn1-6_4.20.0-2_amd64.deb ...
+#43 8.213 Unpacking libtasn1-6:amd64 (4.20.0-2) ...
+#43 8.261 Selecting previously unselected package libgnutls30t64:amd64.
+#43 8.262 Preparing to unpack .../25-libgnutls30t64_3.8.9-3+deb13u1_amd64.deb ...
+#43 8.269 Unpacking libgnutls30t64:amd64 (3.8.9-3+deb13u1) ...
+#43 8.350 Selecting previously unselected package librtmp1:amd64.
+#43 8.351 Preparing to unpack .../26-librtmp1_2.4+20151223.gitfa8646d.1-2+b5_amd64.deb ...
+#43 8.358 Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b5) ...
+#43 8.406 Selecting previously unselected package libssh2-1t64:amd64.
+#43 8.408 Preparing to unpack .../27-libssh2-1t64_1.11.1-1_amd64.deb ...
+#43 8.414 Unpacking libssh2-1t64:amd64 (1.11.1-1) ...
+#43 8.517 Selecting previously unselected package libcurl4t64:amd64.
+#43 8.518 Preparing to unpack .../28-libcurl4t64_8.14.1-2+deb13u2_amd64.deb ...
+#43 8.543 Unpacking libcurl4t64:amd64 (8.14.1-2+deb13u2) ...
+#43 8.602 Selecting previously unselected package libjsoncpp26:amd64.
+#43 8.603 Preparing to unpack .../29-libjsoncpp26_1.9.6-3_amd64.deb ...
+#43 8.609 Unpacking libjsoncpp26:amd64 (1.9.6-3) ...
+#43 8.659 Selecting previously unselected package librhash1:amd64.
+#43 8.660 Preparing to unpack .../30-librhash1_1.4.5-1_amd64.deb ...
+#43 8.667 Unpacking librhash1:amd64 (1.4.5-1) ...
+#43 8.719 Selecting previously unselected package libuv1t64:amd64.
+#43 8.720 Preparing to unpack .../31-libuv1t64_1.50.0-2_amd64.deb ...
+#43 8.726 Unpacking libuv1t64:amd64 (1.50.0-2) ...
+#43 8.769 Selecting previously unselected package cmake.
+#43 8.770 Preparing to unpack .../32-cmake_3.31.6-2_amd64.deb ...
+#43 8.776 Unpacking cmake (3.31.6-2) ...
+#43 9.103 Selecting previously unselected package libstdc++-14-dev:amd64.
+#43 9.104 Preparing to unpack .../33-libstdc++-14-dev_14.2.0-19_amd64.deb ...
+#43 9.111 Unpacking libstdc++-14-dev:amd64 (14.2.0-19) ...
+#43 9.253 Selecting previously unselected package g++-14-x86-64-linux-gnu.
+#43 9.255 Preparing to unpack .../34-g++-14-x86-64-linux-gnu_14.2.0-19_amd64.deb ...
+#43 9.261 Unpacking g++-14-x86-64-linux-gnu (14.2.0-19) ...
+#43 9.636 Selecting previously unselected package g++-14.
+#43 9.637 Preparing to unpack .../35-g++-14_14.2.0-19_amd64.deb ...
+#43 9.644 Unpacking g++-14 (14.2.0-19) ...
+#43 9.682 Selecting previously unselected package g++-x86-64-linux-gnu.
+#43 9.683 Preparing to unpack .../36-g++-x86-64-linux-gnu_4%3a14.2.0-1_amd64.deb ...
+#43 9.690 Unpacking g++-x86-64-linux-gnu (4:14.2.0-1) ...
+#43 9.734 Selecting previously unselected package g++.
+#43 9.735 Preparing to unpack .../37-g++_4%3a14.2.0-1_amd64.deb ...
+#43 9.742 Unpacking g++ (4:14.2.0-1) ...
+#43 9.795 Selecting previously unselected package libgpm2:amd64.
+#43 9.796 Preparing to unpack .../38-libgpm2_1.20.7-11+b2_amd64.deb ...
+#43 9.803 Unpacking libgpm2:amd64 (1.20.7-11+b2) ...
+#43 9.844 Selecting previously unselected package libldap-common.
+#43 9.846 Preparing to unpack .../39-libldap-common_2.6.10+dfsg-1_all.deb ...
+#43 9.852 Unpacking libldap-common (2.6.10+dfsg-1) ...
+#43 9.904 Selecting previously unselected package libpkgconf3:amd64.
+#43 9.912 Preparing to unpack .../40-libpkgconf3_1.8.1-4_amd64.deb ...
+#43 9.921 Unpacking libpkgconf3:amd64 (1.8.1-4) ...
+#43 9.977 Selecting previously unselected package libsasl2-modules:amd64.
+#43 9.979 Preparing to unpack .../41-libsasl2-modules_2.1.28+dfsg1-9_amd64.deb ...
+#43 9.992 Unpacking libsasl2-modules:amd64 (2.1.28+dfsg1-9) ...
+#43 10.03 Selecting previously unselected package libssl-dev:amd64.
+#43 10.03 Preparing to unpack .../42-libssl-dev_3.5.4-1~deb13u2_amd64.deb ...
+#43 10.04 Unpacking libssl-dev:amd64 (3.5.4-1~deb13u2) ...
+#43 10.18 Selecting previously unselected package make.
+#43 10.18 Preparing to unpack .../43-make_4.4.1-2_amd64.deb ...
+#43 10.19 Unpacking make (4.4.1-2) ...
+#43 10.25 Selecting previously unselected package pkgconf-bin.
+#43 10.25 Preparing to unpack .../44-pkgconf-bin_1.8.1-4_amd64.deb ...
+#43 10.26 Unpacking pkgconf-bin (1.8.1-4) ...
+#43 10.31 Selecting previously unselected package pkgconf:amd64.
+#43 10.31 Preparing to unpack .../45-pkgconf_1.8.1-4_amd64.deb ...
+#43 10.32 Unpacking pkgconf:amd64 (1.8.1-4) ...
+#43 10.36 Selecting previously unselected package pkg-config:amd64.
+#43 10.36 Preparing to unpack .../46-pkg-config_1.8.1-4_amd64.deb ...
+#43 10.37 Unpacking pkg-config:amd64 (1.8.1-4) ...
+#43 10.41 Selecting previously unselected package psmisc.
+#43 10.41 Preparing to unpack .../47-psmisc_23.7-2_amd64.deb ...
+#43 10.42 Unpacking psmisc (23.7-2) ...
+#43 10.46 Selecting previously unselected package publicsuffix.
+#43 10.46 Preparing to unpack .../48-publicsuffix_20250328.1952-0.1_all.deb ...
+#43 10.47 Unpacking publicsuffix (20250328.1952-0.1) ...
+#43 10.52 Setting up libexpat1:amd64 (2.7.1-2) ...
+#43 10.54 Setting up libkeyutils1:amd64 (1.6.3-6) ...
+#43 10.56 Setting up libgpm2:amd64 (1.20.7-11+b2) ...
+#43 10.58 Setting up psmisc (23.7-2) ...
+#43 10.60 Setting up libbrotli1:amd64 (1.1.0-2+b7) ...
+#43 10.62 Setting up libsasl2-modules:amd64 (2.1.28+dfsg1-9) ...
+#43 10.64 Setting up libuv1t64:amd64 (1.50.0-2) ...
+#43 10.66 Setting up libpsl5t64:amd64 (0.21.2-1.1+b1) ...
+#43 10.68 Setting up libnghttp2-14:amd64 (1.64.0-1.1) ...
+#43 10.70 Setting up krb5-locales (1.21.3-5) ...
+#43 10.72 Setting up libcom-err2:amd64 (1.47.2-3+b7) ...
+#43 10.74 Setting up libldap-common (2.6.10+dfsg-1) ...
+#43 10.77 Setting up libkrb5support0:amd64 (1.21.3-5) ...
+#43 10.78 Setting up libsasl2-modules-db:amd64 (2.1.28+dfsg1-9) ...
+#43 10.80 Setting up libpkgconf3:amd64 (1.8.1-4) ...
+#43 10.82 Setting up linux-sysctl-defaults (4.12) ...
+#43 10.84 Setting up make (4.4.1-2) ...
+#43 10.86 Setting up libjsoncpp26:amd64 (1.9.6-3) ...
+#43 10.88 Setting up libproc2-0:amd64 (2:4.0.4-9) ...
+#43 10.90 Setting up libssl-dev:amd64 (3.5.4-1~deb13u2) ...
+#43 10.92 Setting up pkgconf-bin (1.8.1-4) ...
+#43 10.94 Setting up libncursesw6:amd64 (6.5+20250216-2) ...
+#43 10.96 Setting up libk5crypto3:amd64 (1.21.3-5) ...
+#43 10.98 Setting up libsasl2-2:amd64 (2.1.28+dfsg1-9) ...
+#43 11.00 Setting up libnghttp3-9:amd64 (1.8.0-1) ...
+#43 11.02 Setting up libffi8:amd64 (3.4.8-2) ...
+#43 11.04 Setting up procps (2:4.0.4-9) ...
+#43 11.08 Setting up libtasn1-6:amd64 (4.20.0-2) ...
+#43 11.10 Setting up cmake-data (3.31.6-2) ...
+#43 11.12 Setting up librhash1:amd64 (1.4.5-1) ...
+#43 11.14 Setting up libkrb5-3:amd64 (1.21.3-5) ...
+#43 11.16 Setting up libssh2-1t64:amd64 (1.11.1-1) ...
+#43 11.18 Setting up libstdc++-14-dev:amd64 (14.2.0-19) ...
+#43 11.20 Setting up publicsuffix (20250328.1952-0.1) ...
+#43 11.22 Setting up libxml2:amd64 (2.12.7+dfsg+really2.9.14-2.1+deb13u2) ...
+#43 11.23 Setting up libldap2:amd64 (2.6.10+dfsg-1) ...
+#43 11.25 Setting up pkgconf:amd64 (1.8.1-4) ...
+#43 11.27 Setting up libp11-kit0:amd64 (0.25.5-3) ...
+#43 11.29 Setting up libgssapi-krb5-2:amd64 (1.21.3-5) ...
+#43 11.31 Setting up pkg-config:amd64 (1.8.1-4) ...
+#43 11.33 Setting up g++-14-x86-64-linux-gnu (14.2.0-19) ...
+#43 11.35 Setting up g++-x86-64-linux-gnu (4:14.2.0-1) ...
+#43 11.37 Setting up g++-14 (14.2.0-19) ...
+#43 11.39 Setting up libarchive13t64:amd64 (3.7.4-4) ...
+#43 11.41 Setting up libgnutls30t64:amd64 (3.8.9-3+deb13u1) ...
+#43 11.43 Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2+b5) ...
+#43 11.45 Setting up g++ (4:14.2.0-1) ...
+#43 11.46 update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+#43 11.47 Setting up libcurl4t64:amd64 (8.14.1-2+deb13u2) ...
+#43 11.49 Setting up cmake (3.31.6-2) ...
+#43 11.51 Processing triggers for libc-bin (2.41-12+deb13u1) ...
+#43 DONE 11.7s
+
+#45 [ingestion-service builder 3/6] WORKDIR /app
+#45 DONE 0.1s
+
+#46 [ingestion-service builder 4/6] COPY Cargo.toml ./
+#46 DONE 0.1s
+
+#47 [flash-sale-service builder 4/6] COPY Cargo.toml ./
+#47 DONE 0.1s
+
+#48 [ingestion-service builder 5/6] COPY src ./src
+#48 DONE 0.1s
+
+#49 [flash-sale-service builder 5/6] COPY src ./src
+#49 DONE 0.1s
+
+#50 [flash-sale-service builder 6/6] RUN cargo build --release
+#50 0.336     Updating crates.io index
+#50 4.452      Locking 195 packages to latest compatible versions
+#50 4.454       Adding axum v0.7.9 (available: v0.8.8)
+#50 4.455       Adding chrono v0.4.38 (available: v0.4.43)
+#50 4.456       Adding deadpool-redis v0.15.1 (available: v0.22.1)
+#50 4.462       Adding rdkafka v0.36.2 (available: v0.39.0)
+#50 4.463       Adding redis v0.25.4 (available: v1.0.2)
+#50 4.471       Adding thiserror v1.0.69 (available: v2.0.18)
+#50 4.475       Adding tower v0.4.13 (available: v0.5.3)
+#50 4.475       Adding tower-http v0.5.2 (available: v0.6.8)
+#50 4.487  Downloading crates ...
+#50 4.547   Downloaded cfg-if v1.0.4
+#50 4.551   Downloaded futures-task v0.3.31
+#50 4.553   Downloaded futures-core v0.3.31
+#50 4.555   Downloaded deadpool-redis v0.15.1
+#50 4.557   Downloaded matchers v0.2.0
+#50 4.562   Downloaded serde_urlencoded v0.7.1
+#50 4.565   Downloaded futures-macro v0.3.31
+#50 4.567   Downloaded slab v0.4.11
+#50 4.570   Downloaded once_cell v1.21.3
+#50 4.574   Downloaded shlex v1.3.0
+#50 4.577   Downloaded tower-service v0.3.3
+#50 4.583   Downloaded signal-hook-registry v1.4.8
+#50 4.586   Downloaded zmij v1.0.17
+#50 4.591   Downloaded tower-layer v0.3.3
+#50 4.595   Downloaded utf8_iter v1.0.4
+#50 4.598   Downloaded iana-time-zone v0.1.65
+#50 4.603   Downloaded zerovec-derive v0.11.2
+#50 4.605   Downloaded synstructure v0.13.2
+#50 4.607   Downloaded tracing-attributes v0.1.31
+#50 4.610   Downloaded toml_datetime v0.7.5+spec-1.1.0
+#50 4.612   Downloaded httpdate v1.0.3
+#50 4.615   Downloaded bitflags v2.10.0
+#50 4.620   Downloaded zerofrom v0.1.6
+#50 4.622   Downloaded stable_deref_trait v1.2.1
+#50 4.624   Downloaded tokio-retry v0.3.0
+#50 4.626   Downloaded sync_wrapper v1.0.2
+#50 4.627   Downloaded http-body-util v0.1.3
+#50 4.629   Downloaded getrandom v0.3.4
+#50 4.634   Downloaded yoke v0.8.1
+#50 4.636   Downloaded toml_parser v1.0.6+spec-1.1.0
+#50 4.640   Downloaded deadpool-runtime v0.1.4
+#50 4.642   Downloaded async-trait v0.1.89
+#50 4.648   Downloaded icu_provider v2.1.1
+#50 4.652   Downloaded unicode-ident v1.0.22
+#50 4.656   Downloaded httparse v1.10.1
+#50 4.659   Downloaded form_urlencoded v1.2.2
+#50 4.660   Downloaded socket2 v0.5.10
+#50 4.664   Downloaded thiserror v1.0.69
+#50 4.669   Downloaded writeable v0.6.2
+#50 4.672   Downloaded smallvec v1.15.1
+#50 4.674   Downloaded futures v0.3.31
+#50 4.679   Downloaded serde_core v1.0.228
+#50 4.683   Downloaded pin-project-internal v1.1.10
+#50 4.684   Downloaded tower-http v0.5.2
+#50 4.693   Downloaded num_enum v0.7.5
+#50 4.699   Downloaded zerocopy v0.8.36
+#50 4.726   Downloaded url v2.5.8
+#50 4.733   Downloaded tracing-subscriber v0.3.22
+#50 4.765   Downloaded tower v0.5.3
+#50 4.802   Downloaded zerotrie v0.2.3
+#50 4.809   Downloaded serde_derive v1.0.228
+#50 4.821   Downloaded pkg-config v0.3.32
+#50 4.831   Downloaded zerovec v0.11.5
+#50 4.846   Downloaded cc v1.2.54
+#50 4.860   Downloaded serde_json v1.0.149
+#50 4.883   Downloaded rdkafka v0.36.2
+#50 4.897   Downloaded mio v1.1.1
+#50 4.916   Downloaded redis v0.25.4
+#50 4.936   Downloaded hashbrown v0.16.1
+#50 4.956   Downloaded futures-util v0.3.31
+#50 4.993   Downloaded regex-automata v0.4.13
+#50 5.037   Downloaded memchr v2.7.6
+#50 5.055   Downloaded hyper-util v0.1.19
+#50 5.077   Downloaded tracing v0.1.44
+#50 5.102   Downloaded icu_normalizer_data v2.1.1
+#50 5.109   Downloaded regex-syntax v0.8.8
+#50 5.124   Downloaded ryu v1.0.22
+#50 5.137   Downloaded proc-macro-crate v3.4.0
+#50 5.141   Downloaded parking_lot v0.12.5
+#50 5.147   Downloaded num-traits v0.2.19
+#50 5.154   Downloaded libc v0.2.180
+#50 5.289   Downloaded icu_properties v2.1.2
+#50 5.297   Downloaded rand v0.8.5
+#50 5.306   Downloaded idna v1.1.0
+#50 5.314   Downloaded icu_properties_data v2.1.2
+#50 5.340   Downloaded libz-sys v1.1.23
+#50 5.391   Downloaded tokio v1.49.0
+#50 5.486   Downloaded tower v0.4.13
+#50 5.510   Downloaded indexmap v2.13.0
+#50 5.520   Downloaded icu_collections v2.1.1
+#50 5.530   Downloaded icu_locale_core v2.1.1
+#50 5.552   Downloaded proc-macro2 v1.0.106
+#50 5.563   Downloaded num_enum_derive v0.7.5
+#50 5.564   Downloaded winnow v0.7.14
+#50 5.585   Downloaded vcpkg v0.2.15
+#50 5.699   Downloaded scopeguard v1.2.0
+#50 5.702   Downloaded pin-utils v0.1.0
+#50 5.705   Downloaded matchit v0.7.3
+#50 5.710   Downloaded log v0.4.29
+#50 5.724   Downloaded errno v0.3.14
+#50 5.733   Downloaded rand_core v0.6.4
+#50 5.738   Downloaded pin-project-lite v0.2.16
+#50 5.759   Downloaded lazy_static v1.5.0
+#50 5.765   Downloaded itoa v1.0.17
+#50 5.775   Downloaded tokio-util v0.7.18
+#50 5.807   Downloaded syn v2.0.114
+#50 5.824   Downloaded pin-project v1.1.10
+#50 5.876   Downloaded parking_lot_core v0.9.12
+#50 5.883   Downloaded num_cpus v1.17.0
+#50 5.896   Downloaded mime v0.3.17
+#50 5.900   Downloaded potential_utf v0.1.4
+#50 5.904   Downloaded percent-encoding v2.3.2
+#50 5.908   Downloaded idna_adapter v1.2.1
+#50 5.910   Downloaded litemap v0.8.1
+#50 5.918   Downloaded http v1.4.0
+#50 5.932   Downloaded quote v1.0.44
+#50 5.943   Downloaded ppv-lite86 v0.2.21
+#50 5.948   Downloaded socket2 v0.6.2
+#50 5.954   Downloaded rustversion v1.0.22
+#50 5.964   Downloaded equivalent v1.0.2
+#50 5.968   Downloaded combine v4.6.7
+#50 5.985   Downloaded arc-swap v1.8.0
+#50 6.000   Downloaded serde_path_to_error v0.1.20
+#50 6.005   Downloaded lock_api v0.4.14
+#50 6.013   Downloaded http-body v1.0.1
+#50 6.017   Downloaded find-msvc-tools v0.1.8
+#50 6.021   Downloaded dotenvy v0.15.7
+#50 6.031   Downloaded toml_edit v0.23.10+spec-1.0.0
+#50 6.041   Downloaded tokio-macros v2.6.0
+#50 6.044   Downloaded tinystr v0.8.2
+#50 6.050   Downloaded thiserror-impl v1.0.69
+#50 6.054   Downloaded futures-channel v0.3.31
+#50 6.059   Downloaded getrandom v0.2.17
+#50 6.067   Downloaded bytes v1.11.0
+#50 6.078   Downloaded futures-io v0.3.31
+#50 6.081   Downloaded futures-executor v0.3.31
+#50 6.086   Downloaded deadpool v0.12.3
+#50 6.095   Downloaded displaydoc v0.2.5
+#50 6.103   Downloaded yoke-derive v0.8.1
+#50 6.109   Downloaded chrono v0.4.38
+#50 6.125   Downloaded autocfg v1.5.0
+#50 6.131   Downloaded zerofrom-derive v0.1.6
+#50 6.134   Downloaded uuid v1.20.0
+#50 6.140   Downloaded tracing-log v0.2.0
+#50 6.145   Downloaded futures-sink v0.3.31
+#50 6.149   Downloaded axum-core v0.4.5
+#50 6.155   Downloaded tracing-core v0.1.36
+#50 6.163   Downloaded cmake v0.1.57
+#50 6.170   Downloaded thread_local v1.1.9
+#50 6.175   Downloaded aho-corasick v1.1.4
+#50 6.196   Downloaded sha1_smol v1.0.1
+#50 6.201   Downloaded serde v1.0.228
+#50 6.214   Downloaded icu_normalizer v2.1.1
+#50 6.225   Downloaded hyper v1.8.1
+#50 6.246   Downloaded axum v0.7.9
+#50 6.273   Downloaded sharded-slab v0.1.7
+#50 6.284   Downloaded atomic-waker v1.1.2
+#50 6.288   Downloaded nu-ansi-term v0.50.3
+#50 6.299   Downloaded rand_chacha v0.3.1
+#50 6.530   Downloaded rdkafka-sys v4.10.0+2.12.1
+#50 6.963    Compiling proc-macro2 v1.0.106
+#50 6.963    Compiling unicode-ident v1.0.22
+#50 6.963    Compiling quote v1.0.44
+#50 6.964    Compiling libc v0.2.180
+#50 6.964    Compiling cfg-if v1.0.4
+#50 6.965    Compiling pin-project-lite v0.2.16
+#50 6.965    Compiling smallvec v1.15.1
+#50 6.978    Compiling bytes v1.11.0
+#50 6.979    Compiling parking_lot_core v0.9.12
+#50 6.980    Compiling futures-core v0.3.31
+#50 6.980    Compiling scopeguard v1.2.0
+#50 6.983    Compiling stable_deref_trait v1.2.1
+#50 6.987    Compiling futures-sink v0.3.31
+#50 6.987    Compiling itoa v1.0.17
+#50 6.987    Compiling pin-utils v0.1.0
+#50 6.996    Compiling memchr v2.7.6
+#50 6.996    Compiling rustversion v1.0.22
+#50 6.997    Compiling serde_core v1.0.228
+#50 6.998    Compiling futures-io v0.3.31
+#50 6.998    Compiling litemap v0.8.1
+#50 7.066    Compiling futures-task v0.3.31
+#50 7.093    Compiling once_cell v1.21.3
+#50 7.101    Compiling slab v0.4.11
+#50 7.133    Compiling shlex v1.3.0
+#50 7.145    Compiling log v0.4.29
+#50 7.182    Compiling find-msvc-tools v0.1.8
+#50 7.237    Compiling lock_api v0.4.14
+#50 7.379    Compiling writeable v0.6.2
+#50 7.407    Compiling icu_properties_data v2.1.2
+#50 7.470    Compiling futures-channel v0.3.31
+#50 7.480    Compiling tracing-core v0.1.36
+#50 7.508    Compiling icu_normalizer_data v2.1.1
+#50 7.509    Compiling zerocopy v0.8.36
+#50 7.509    Compiling winnow v0.7.14
+#50 7.566    Compiling equivalent v1.0.2
+#50 7.574    Compiling cc v1.2.54
+#50 7.621    Compiling hashbrown v0.16.1
+#50 7.661    Compiling pkg-config v0.3.32
+#50 7.751    Compiling vcpkg v0.2.15
+#50 7.775    Compiling serde v1.0.228
+#50 7.794    Compiling tower-service v0.3.3
+#50 7.857    Compiling percent-encoding v2.3.2
+#50 7.894    Compiling toml_datetime v0.7.5+spec-1.1.0
+#50 7.941    Compiling tower-layer v0.3.3
+#50 7.978    Compiling httparse v1.10.1
+#50 7.989    Compiling zmij v1.0.17
+#50 8.055    Compiling utf8_iter v1.0.4
+#50 8.217    Compiling form_urlencoded v1.2.2
+#50 8.239    Compiling ryu v1.0.22
+#50 8.278    Compiling serde_json v1.0.149
+#50 8.302    Compiling autocfg v1.5.0
+#50 8.337    Compiling lazy_static v1.5.0
+#50 8.503    Compiling sync_wrapper v1.0.2
+#50 8.584    Compiling httpdate v1.0.3
+#50 8.652    Compiling http v1.4.0
+#50 8.901    Compiling syn v2.0.114
+#50 8.906    Compiling indexmap v2.13.0
+#50 8.907    Compiling regex-syntax v0.8.8
+#50 8.912    Compiling getrandom v0.3.4
+#50 8.924    Compiling atomic-waker v1.1.2
+#50 8.996    Compiling arc-swap v1.8.0
+#50 8.997    Compiling thiserror v1.0.69
+#50 9.007    Compiling sha1_smol v1.0.1
+#50 9.027    Compiling mime v0.3.17
+#50 9.157    Compiling tracing-log v0.2.0
+#50 9.205    Compiling sharded-slab v0.1.7
+#50 9.391    Compiling errno v0.3.14
+#50 9.429    Compiling mio v1.1.1
+#50 9.463    Compiling socket2 v0.6.2
+#50 9.492    Compiling getrandom v0.2.17
+#50 9.557    Compiling signal-hook-registry v1.4.8
+#50 9.561    Compiling cmake v0.1.57
+#50 9.589    Compiling num-traits v0.2.19
+#50 9.601    Compiling socket2 v0.5.10
+#50 9.605    Compiling num_cpus v1.17.0
+#50 9.825    Compiling parking_lot v0.12.5
+#50 9.845    Compiling rand_core v0.6.4
+#50 9.985    Compiling
+#50 ...
+
+#51 [ingestion-service builder 6/6] RUN cargo build --release
+#51 0.354     Updating crates.io index
+#51 3.552      Locking 162 packages to latest compatible versions
+#51 3.554       Adding axum v0.7.9 (available: v0.8.8)
+#51 3.555       Adding chrono v0.4.38 (available: v0.4.43)
+#51 3.558       Adding jsonwebtoken v9.3.1 (available: v10.3.0)
+#51 3.559       Adding rdkafka v0.36.2 (available: v0.39.0)
+#51 3.562       Adding thiserror v1.0.69 (available: v2.0.18)
+#51 3.565       Adding tower v0.4.13 (available: v0.5.3)
+#51 3.565       Adding tower-http v0.5.2 (available: v0.6.8)
+#51 3.572  Downloading crates ...
+#51 3.719   Downloaded want v0.3.1
+#51 3.736   Downloaded tower-service v0.3.3
+#51 3.738   Downloaded toml_datetime v0.7.5+spec-1.1.0
+#51 3.740   Downloaded tokio-macros v2.6.0
+#51 3.742   Downloaded untrusted v0.9.0
+#51 3.745   Downloaded try-lock v0.2.5
+#51 3.746   Downloaded tracing-log v0.2.0
+#51 3.749   Downloaded tower v0.5.3
+#51 3.760   Downloaded zmij v1.0.17
+#51 3.762   Downloaded toml_parser v1.0.6+spec-1.1.0
+#51 3.764   Downloaded axum-core v0.4.5
+#51 3.766   Downloaded tracing-core v0.1.36
+#51 3.770   Downloaded tracing-attributes v0.1.31
+#51 3.774   Downloaded unicode-ident v1.0.22
+#51 3.778   Downloaded fnv v1.0.7
+#51 3.779   Downloaded tower-layer v0.3.3
+#51 3.785   Downloaded tower v0.4.13
+#51 3.796   Downloaded lazy_static v1.5.0
+#51 3.799   Downloaded futures-task v0.3.31
+#51 3.800   Downloaded futures-channel v0.3.31
+#51 3.803   Downloaded http-body-util v0.1.3
+#51 3.804   Downloaded tower-http v0.5.2
+#51 3.815   Downloaded jsonwebtoken v9.3.1
+#51 3.820   Downloaded winnow v0.7.14
+#51 3.829   Downloaded toml_edit v0.23.10+spec-1.0.0
+#51 3.834   Downloaded tracing-subscriber v0.3.22
+#51 3.842   Downloaded vcpkg v0.2.15
+#51 3.881   Downloaded time-core v0.1.8
+#51 3.883   Downloaded tracing v0.1.44
+#51 3.897   Downloaded thread_local v1.1.9
+#51 3.899   Downloaded slab v0.4.11
+#51 3.900   Downloaded simple_asn1 v0.6.3
+#51 3.902   Downloaded pkg-config v0.3.32
+#51 3.903   Downloaded thiserror v2.0.18
+#51 3.908   Downloaded bitflags v2.10.0
+#51 3.912   Downloaded shlex v1.3.0
+#51 3.914   Downloaded quote v1.0.44
+#51 3.917   Downloaded lock_api v0.4.14
+#51 3.918   Downloaded dotenvy v0.15.7
+#51 3.921   Downloaded num_enum v0.7.5
+#51 3.926   Downloaded httparse v1.10.1
+#51 3.929   Downloaded http v1.4.0
+#51 3.933   Downloaded iana-time-zone v0.1.65
+#51 3.935   Downloaded serde_path_to_error v0.1.20
+#51 3.937   Downloaded parking_lot_core v0.9.12
+#51 3.940   Downloaded getrandom v0.2.17
+#51 3.943   Downloaded find-msvc-tools v0.1.8
+#51 3.945   Downloaded async-trait v0.1.89
+#51 3.949   Downloaded sharded-slab v0.1.7
+#51 3.952   Downloaded num-traits v0.2.19
+#51 3.954   Downloaded parking_lot v0.12.5
+#51 3.957   Downloaded thiserror-impl v1.0.69
+#51 3.958   Downloaded serde_derive v1.0.228
+#51 3.961   Downloaded time-macros v0.2.26
+#51 3.963   Downloaded rustversion v1.0.22
+#51 3.967   Downloaded proc-macro2 v1.0.106
+#51 3.970   Downloaded ryu v1.0.22
+#51 3.973   Downloaded thiserror v1.0.69
+#51 3.977   Downloaded hashbrown v0.16.1
+#51 3.983   Downloaded bytes v1.11.0
+#51 3.988   Downloaded serde_core v1.0.228
+#51 3.991   Downloaded log v0.4.29
+#51 3.994   Downloaded cc v1.2.54
+#51 3.996   Downloaded base64 v0.22.1
+#51 4.001   Downloaded thiserror-impl v2.0.18
+#51 4.003   Downloaded hyper-util v0.1.19
+#51 4.010   Downloaded aho-corasick v1.1.4
+#51 4.015   Downloaded hyper v1.8.1
+#51 4.023   Downloaded time v0.3.46
+#51 4.034   Downloaded h2 v0.4.13
+#51 4.040   Downloaded sync_wrapper v1.0.2
+#51 4.041   Downloaded socket2 v0.6.2
+#51 4.043   Downloaded serde_urlencoded v0.7.1
+#51 4.045   Downloaded scopeguard v1.2.0
+#51 4.047   Downloaded powerfmt v0.2.0
+#51 4.048   Downloaded pin-utils v0.1.0
+#51 4.049   Downloaded pem v3.0.6
+#51 4.051   Downloaded num_enum_derive v0.7.5
+#51 4.052   Downloaded mime v0.3.17
+#51 4.054   Downloaded smallvec v1.15.1
+#51 4.057   Downloaded proc-macro-crate v3.4.0
+#51 4.059   Downloaded pin-project-lite v0.2.16
+#51 4.065   Downloaded nu-ansi-term v0.50.3
+#51 4.067   Downloaded errno v0.3.14
+#51 4.069   Downloaded matchit v0.7.3
+#51 4.071   Downloaded httpdate v1.0.3
+#51 4.073   Downloaded form_urlencoded v1.2.2
+#51 4.074   Downloaded equivalent v1.0.2
+#51 4.076   Downloaded libz-sys v1.1.23
+#51 4.094   Downloaded cfg-if v1.0.4
+#51 4.096   Downloaded autocfg v1.5.0
+#51 4.098   Downloaded signal-hook-registry v1.4.8
+#51 4.099   Downloaded percent-encoding v2.3.2
+#51 4.100   Downloaded num-integer v0.1.46
+#51 4.101   Downloaded memchr v2.7.6
+#51 4.109   Downloaded mio v1.1.1
+#51 4.115   Downloaded num-bigint v0.4.6
+#51 4.120   Downloaded rdkafka v0.36.2
+#51 4.125   Downloaded indexmap v2.13.0
+#51 4.129   Downloaded itoa v1.0.17
+#51 4.131   Downloaded futures-sink v0.3.31
+#51 4.132   Downloaded cmake v0.1.57
+#51 4.134   Downloaded futures-util v0.3.31
+#51 4.144   Downloaded serde_json v1.0.149
+#51 4.151   Downloaded axum v0.7.9
+#51 4.158   Downloaded tokio-util v0.7.18
+#51 4.164   Downloaded num-conv v0.2.0
+#51 4.165   Downloaded matchers v0.2.0
+#51 4.167   Downloaded atomic-waker v1.1.2
+#51 4.168   Downloaded http-body v1.0.1
+#51 4.169   Downloaded once_cell v1.21.3
+#51 4.172   Downloaded deranged v0.5.5
+#51 4.173   Downloaded futures-core v0.3.31
+#51 4.185   Downloaded chrono v0.4.38
+#51 4.191   Downloaded syn v2.0.114
+#51 4.200   Downloaded regex-syntax v0.8.8
+#51 4.299   Downloaded libc v0.2.180
+#51 4.343   Downloaded tokio v1.49.0
+#51 4.381   Downloaded ring v0.17.14
+#51 4.424   Downloaded serde v1.0.228
+#51 4.435   Downloaded regex-automata v0.4.13
+#51 4.576   Downloaded rdkafka-sys v4.10.0+2.12.1
+#51 4.731    Compiling proc-macro2 v1.0.106
+#51 4.731    Compiling unicode-ident v1.0.22
+#51 4.731    Compiling quote v1.0.44
+#51 4.731    Compiling libc v0.2.180
+#51 4.733    Compiling cfg-if v1.0.4
+#51 4.735    Compiling itoa v1.0.17
+#51 4.736    Compiling pin-project-lite v0.2.16
+#51 4.736    Compiling bytes v1.11.0
+#51 4.739    Compiling smallvec v1.15.1
+#51 4.740    Compiling futures-core v0.3.31
+#51 4.740    Compiling find-msvc-tools v0.1.8
+#51 4.740    Compiling parking_lot_core v0.9.12
+#51 4.740    Compiling shlex v1.3.0
+#51 4.740    Compiling log v0.4.29
+#51 4.741    Compiling once_cell v1.21.3
+#51 4.745    Compiling scopeguard v1.2.0
+#51 4.745    Compiling serde_core v1.0.228
+#51 4.751    Compiling autocfg v1.5.0
+#51 4.753    Compiling rustversion v1.0.22
+#51 4.757    Compiling winnow v0.7.14
+#51 4.783    Compiling serde v1.0.228
+#51 4.802    Compiling equivalent v1.0.2
+#51 4.819    Compiling pin-utils v0.1.0
+#51 4.854    Compiling lock_api v0.4.14
+#51 4.872    Compiling pkg-config v0.3.32
+#51 4.887    Compiling hashbrown v0.16.1
+#51 4.892    Compiling toml_datetime v0.7.5+spec-1.1.0
+#51 4.914    Compiling cc v1.2.54
+#51 4.957    Compiling tracing-core v0.1.36
+#51 4.984    Compiling zmij v1.0.17
+#51 5.021    Compiling tower-service v0.3.3
+#51 5.062    Compiling vcpkg v0.2.15
+#51 5.070    Compiling futures-sink v0.3.31
+#51 5.102    Compiling futures-task v0.3.31
+#51 5.112    Compiling slab v0.4.11
+#51 5.125    Compiling httparse v1.10.1
+#51 5.182    Compiling serde_json v1.0.149
+#51 5.262    Compiling tower-layer v0.3.3
+#51 5.324    Compiling futures-util v0.3.31
+#51 5.370    Compiling futures-channel v0.3.31
+#51 5.404    Compiling try-lock v0.2.5
+#51 5.420    Compiling num-conv v0.2.0
+#51 5.485    Compiling powerfmt v0.2.0
+#51 5.505    Compiling memchr v2.7.6
+#51 5.548    Compiling thiserror v2.0.18
+#51 5.620    Compiling atomic-waker v1.1.2
+#51 5.684    Compiling fnv v1.0.7
+#51 5.749    Compiling http v1.4.0
+#51 5.784    Compiling time-core v0.1.8
+#51 5.791    Compiling deranged v0.5.5
+#51 5.904    Compiling indexmap v2.13.0
+#51 5.912    Compiling want v0.3.1
+#51 5.964    Compiling time-macros v0.2.26
+#51 6.276    Compiling syn v2.0.114
+#51 6.427    Compiling cmake v0.1.57
+#51 6.541    Compiling num-traits v0.2.19
+#51 6.627    Compiling percent-encoding v2.3.2
+#51 6.638    Compiling httpdate v1.0.3
+#51 6.874    Compiling http-body v1.0.1
+#51 7.048    Compiling errno v0.3.14
+#51 7.158    Compiling socket2 v0.6.2
+#51 7.159    Compiling mio v1.1.1
+#51 7.309    Compiling signal-hook-registry v1.4.8
+#51 7.368    Compiling http-body-util v0.1.3
+#51 7.479    Compiling parking_lot v0.12.5
+#51 7.541    Compiling sync_wrapper v1.0.2
+#51 7.666    Compiling regex-syntax v0.8.8
+#51 7.976    Compiling getrandom v0.2.17
+#51 8.050    Compiling toml_parser v1.0.6+spec-1.1.0
+#51 8.102    Compiling num-integer v0.1.46
+#51 8.163    Compiling form_urlencoded v1.2.2
+#51 8.174    Compiling lazy_static v1.5.0
+#51 8.267    Compiling untrusted v0.9.0
+#51 8.269    Compiling ryu v1.0.22
+#51 8.284    Compiling base64 v0.22.1
+#51 8.292    Compiling thiserror v1.0.69
+#51 8.350    Compiling mime v0.3.17
+#51 8.361    Compiling sharded-slab v0.1.7
+#51 8.379    Compiling tracing-log v0.2.0
+#51 8.558    Compiling thread_local v1.1.9
+#51 8.584    Compiling iana-time-zone v0.1.65
+#51 8.628    Compiling nu-ansi-term v0.50.3
+#51 8.717    Compiling num-bigint v0.4.6
+#51 8.798    Compiling pem v3.0.6
+#51 8.868    Compiling bitflags v2.10.0
+#51 8.888    Compiling matchit v0.7.3
+#51 8.979    Compiling dotenvy v0.15.7
+#51 9.222    Compiling serde_path_to_error v0.1.20
+#51 9.341    Compiling toml_edit v0.23.10+spec-1.0.0
+#51 10.59    Compiling time v0.3.46
+#51 10.65    Compiling regex-automata v0.4.13
+#51 11.08    Compiling proc-macro-crate v3.4.0
+#51 12.43    Compiling libz-sys v1.1.23
+#51 12.43    Compiling rdkafka-sys v4.10.0+2.12.1
+#51 12.43    Compiling ring v0.17.14
+#51 14.01    Compiling matchers v0.2.0
+#51 17.42    Compiling tracing-attributes v0.1.31
+#51 17.43    Compiling tokio-macros v2.6.0
+#51 17.43    Compiling serde_derive v1.0.228
+#51 17.43    Compiling thiserror-impl v2.0.18
+#51 17.43    Compiling num_enum_derive v0.7.5
+#51 17.44    Compiling async-trait v0.1.89
+#51 17.44    Compiling thiserror-impl v1.0.69
+#51 ...
+
+#50 [flash-sale-service builder 6/6] RUN cargo build --release
+#50 9.985    Compiling thread_local v1.1.9
+#50 10.04    Compiling nu-ansi-term v0.50.3
+#50 10.05    Compiling bitflags v2.10.0
+#50 10.26    Compiling http-body v1.0.1
+#50 10.38    Compiling matchit v0.7.3
+#50 10.42    Compiling http-body-util v0.1.3
+#50 10.47    Compiling iana-time-zone v0.1.65
+#50 10.53    Compiling dotenvy v0.15.7
+#50 10.68    Compiling libz-sys v1.1.23
+#50 10.68    Compiling rdkafka-sys v4.10.0+2.12.1
+#50 11.05    Compiling toml_parser v1.0.6+spec-1.1.0
+#50 11.50    Compiling regex-automata v0.4.13
+#50 11.52    Compiling toml_edit v0.23.10+spec-1.0.0
+#50 12.23    Compiling serde_path_to_error v0.1.20
+#50 12.23    Compiling uuid v1.20.0
+#50 12.75    Compiling proc-macro-crate v3.4.0
+#50 14.28    Compiling ppv-lite86 v0.2.21
+#50 15.20    Compiling rand_chacha v0.3.1
+#50 15.54    Compiling rand v0.8.5
+#50 15.91    Compiling synstructure v0.13.2
+#50 16.34    Compiling matchers v0.2.0
+#50 16.50    Compiling zerofrom-derive v0.1.6
+#50 16.50    Compiling yoke-derive v0.8.1
+#50 16.50    Compiling zerovec-derive v0.11.2
+#50 16.51    Compiling tokio-macros v2.6.0
+#50 16.51    Compiling displaydoc v0.2.5
+#50 16.51    Compiling futures-macro v0.3.31
+#50 16.51    Compiling tracing-attributes v0.1.31
+#50 16.51    Compiling serde_derive v1.0.228
+#50 16.51    Compiling async-trait v0.1.89
+#50 16.52    Compiling pin-project-internal v1.1.10
+#50 16.52    Compiling num_enum_derive v0.7.5
+#50 16.52    Compiling thiserror-impl v1.0.69
+#50 17.01    Compiling tokio v1.49.0
+#50 17.42    Compiling futures-util v0.3.31
+#50 17.46    Compiling pin-project v1.1.10
+#50 17.47    Compiling zerofrom v0.1.6
+#50 17.53    Compiling yoke v0.8.1
+#50 17.58    Compiling num_enum v0.7.5
+#50 17.60    Compiling tracing v0.1.44
+#50 17.69    Compiling zerovec v0.11.5
+#50 17.69    Compiling zerotrie v0.2.3
+#50 17.79    Compiling tower v0.4.13
+#50 17.79    Compiling tower-http v0.5.2
+#50 17.80    Compiling tracing-subscriber v0.3.22
+#50 18.40    Compiling tinystr v0.8.2
+#50 18.41    Compiling potential_utf v0.1.4
+#50 18.56    Compiling icu_collections v2.1.1
+#50 18.66    Compiling icu_locale_core v2.1.1
+#50 20.38    Compiling icu_provider v2.1.1
+#50 20.66    Compiling serde_urlencoded v0.7.1
+#50 20.74    Compiling chrono v0.4.38
+#50 20.87    Compiling icu_normalizer v2.1.1
+#50 20.89    Compiling icu_properties v2.1.2
+#50 ...
+
+#51 [ingestion-service builder 6/6] RUN cargo build --release
+#51 21.87    Compiling tokio v1.49.0
+#51 24.92    Compiling num_enum v0.7.5
+#51 26.97    Compiling simple_asn1 v0.6.3
+#51 28.10    Compiling serde_urlencoded v0.7.1
+#51 28.10    Compiling chrono v0.4.38
+#51 28.48    Compiling tokio-util v0.7.18
+#51 28.81    Compiling jsonwebtoken v9.3.1
+#51 29.17 error: failed to run custom build command for `rdkafka-sys v4.10.0+2.12.1`
+#51 29.17 
+#51 29.17 Caused by:
+#51 29.18   process didn't exit successfully: `/app/target/release/build/rdkafka-sys-a0313e8b06715262/build-script-build` (exit status: 101)
+#51 29.18   --- stdout
+#51 29.18   Configuring and compiling librdkafka
+#51 29.18   CMAKE_TOOLCHAIN_FILE_x86_64-unknown-linux-gnu = None
+#51 29.18   CMAKE_TOOLCHAIN_FILE_x86_64_unknown_linux_gnu = None
+#51 29.18   HOST_CMAKE_TOOLCHAIN_FILE = None
+#51 29.18   CMAKE_TOOLCHAIN_FILE = None
+#51 29.18   CMAKE_GENERATOR_x86_64-unknown-linux-gnu = None
+#51 29.18   CMAKE_GENERATOR_x86_64_unknown_linux_gnu = None
+#51 29.18   HOST_CMAKE_GENERATOR = None
+#51 29.18   CMAKE_GENERATOR = None
+#51 29.18   CMAKE_PREFIX_PATH_x86_64-unknown-linux-gnu = None
+#51 29.18   CMAKE_PREFIX_PATH_x86_64_unknown_linux_gnu = None
+#51 29.18   HOST_CMAKE_PREFIX_PATH = None
+#51 29.18   CMAKE_PREFIX_PATH = None
+#51 29.18   CMAKE_x86_64-unknown-linux-gnu = None
+#51 29.18   CMAKE_x86_64_unknown_linux_gnu = None
+#51 29.18   HOST_CMAKE = None
+#51 29.18   CMAKE = None
+#51 29.18   -- The C compiler identification is GNU 14.2.0
+#51 29.18   -- The CXX compiler identification is GNU 14.2.0
+#51 29.18   -- Detecting C compiler ABI info
+#51 29.18   -- Detecting C compiler ABI info - done
+#51 29.18   -- Check for working C compiler: /usr/bin/cc - skipped
+#51 29.18   -- Detecting C compile features
+#51 29.18   -- Detecting C compile features - done
+#51 29.18   -- Detecting CXX compiler ABI info
+#51 29.18   -- Detecting CXX compiler ABI info - done
+#51 29.18   -- Check for working CXX compiler: /usr/bin/c++ - skipped
+#51 29.18   -- Detecting CXX compile features
+#51 29.18   -- Detecting CXX compile features - done
+#51 29.18   -- Looking for pow in m
+#51 29.18   -- Looking for pow in m - found
+#51 29.18   -- Checking for module 'libsasl2'
+#51 29.18   --   Package 'libsasl2', required by 'virtual:world', not found
+#51 29.18   -- Found ZLIB: /app/target/release/build/libz-sys-1fbc2d1fd10eab3e/out/lib/libz.a (found version "1.3.1")
+#51 29.18   -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+#51 29.18   -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+#51 29.18   -- Found Threads: TRUE
+#51 29.18   -- Configuring done (6.1s)
+#51 29.18   -- Generating done (0.0s)
+#51 29.18   -- Build files have been written to: /app/target/release/build/rdkafka-sys-c984c94598a728ea/out/build
+#51 29.18   [  1%] Building C object src/CMakeFiles/rdkafka.dir/crc32c.c.o
+#51 29.18   [  2%] Building C object src/CMakeFiles/rdkafka.dir/rdaddr.c.o
+#51 29.18   [  3%] Building C object src/CMakeFiles/rdkafka.dir/rdavl.c.o
+#51 29.18   [  4%] Building C object src/CMakeFiles/rdkafka.dir/rdbuf.c.o
+#51 29.18   [  5%] Building C object src/CMakeFiles/rdkafka.dir/rdcrc32.c.o
+#51 29.18   [  6%] Building C object src/CMakeFiles/rdkafka.dir/rdfnv1a.c.o
+#51 29.18   [  7%] Building C object src/CMakeFiles/rdkafka.dir/rdbase64.c.o
+#51 29.18   [  8%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka.c.o
+#51 29.18   [  9%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_assignor.c.o
+#51 29.18   [ 10%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_broker.c.o
+#51 29.18   [ 11%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_buf.c.o
+#51 29.18   [ 12%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_cgrp.c.o
+#51 29.18   [ 13%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_conf.c.o
+#51 29.18   [ 14%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_event.c.o
+#51 29.18 
+#51 29.18   --- stderr
+#51 29.18   Building and linking librdkafka statically
+#51 29.18   running: cd "/app/target/release/build/rdkafka-sys-c984c94598a728ea/out/build" && CMAKE_PREFIX_PATH="/app/target/release/build/libz-sys-1fbc2d1fd10eab3e/out:" LC_ALL="C" "cmake" "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rdkafka-sys-4.10.0+2.12.1/librdkafka" "-B" "/app/target/release/build/rdkafka-sys-c984c94598a728ea/out/build" "-DRDKAFKA_BUILD_STATIC=1" "-DRDKAFKA_BUILD_TESTS=0" "-DRDKAFKA_BUILD_EXAMPLES=0" "-DCMAKE_INSTALL_LIBDIR=lib" "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" "-DWITH_ZLIB=1" "-DWITH_CURL=0" "-DWITH_SSL=0" "-DWITH_SASL=0" "-DWITH_ZSTD=0" "-DENABLE_LZ4_EXT=0" "-DCMAKE_INSTALL_PREFIX=/app/target/release/build/rdkafka-sys-c984c94598a728ea/out" "-DCMAKE_C_FLAGS= -ffunction-sections -fdata-sections -fPIC -m64 -w" "-DCMAKE_C_COMPILER=/usr/bin/cc" "-DCMAKE_CXX_FLAGS= -ffunction-sections -fdata-sections -fPIC -m64 -w" "-DCMAKE_CXX_COMPILER=/usr/bin/c++" "-DCMAKE_ASM_FLAGS= -ffunction-sections -fdata-sections -fPIC -m64 -w" "-DCMAKE_ASM_COMPILER=/usr/bin/cc" "-DCMAKE_BUILD_TYPE=Release"
+#51 29.18   CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+#51 29.18     Compatibility with CMake < 3.10 will be removed from a future version of
+#51 29.18     CMake.
+#51 29.18 
+#51 29.18     Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+#51 29.18     to tell CMake that the project requires at least <min> but has been updated
+#51 29.18     to work with policies introduced by <max> or earlier.
+#51 29.18 
+#51 29.18 
+#51 29.18   CMake Warning:
+#51 29.18     Manually-specified variables were not used by the project:
+#51 29.18 
+#51 29.18       CMAKE_ASM_COMPILER
+#51 29.18       CMAKE_ASM_FLAGS
+#51 29.18       CMAKE_POLICY_VERSION_MINIMUM
+#51 29.18 
+#51 29.18 
+#51 29.18   running: cd "/app/target/release/build/rdkafka-sys-c984c94598a728ea/out/build" && LC_ALL="C" MAKEFLAGS="-j --jobserver-fds=9,10 --jobserver-auth=9,10" "cmake" "--build" "/app/target/release/build/rdkafka-sys-c984c94598a728ea/out/build" "--target" "install" "--config" "Release"
+#51 29.18   /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rdkafka-sys-4.10.0+2.12.1/librdkafka/src/rdkafka_conf.c:60:10: fatal error: curl/curl.h: No such file or directory
+#51 29.18      60 | #include <curl/curl.h>
+#51 29.18         |          ^~~~~~~~~~~~~
+#51 29.18   compilation terminated.
+#51 29.18   gmake[2]: *** [src/CMakeFiles/rdkafka.dir/build.make:247: src/CMakeFiles/rdkafka.dir/rdkafka_conf.c.o] Error 1
+#51 29.18   gmake[2]: *** Waiting for unfinished jobs....
+#51 29.18   gmake[1]: *** [CMakeFiles/Makefile2:129: src/CMakeFiles/rdkafka.dir/all] Error 2
+#51 29.18   gmake: *** [Makefile:136: all] Error 2
+#51 29.18 
+#51 29.18   thread 'main' (1795) panicked at /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cmake-0.1.57/src/lib.rs:1132:5:
+#51 29.18 
+#51 29.18   command did not execute successfully, got: exit status: 2
+#51 29.18 
+#51 29.18   build script failed, must exit now
+#51 29.18   note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+#51 29.18 warning: build failed, waiting for other jobs to finish...
+#51 ERROR: process "/bin/sh -c cargo build --release" did not complete successfully: exit code: 101
+
+#50 [flash-sale-service builder 6/6] RUN cargo build --release
+#50 21.90    Compiling futures-executor v0.3.31
+#50 21.90    Compiling axum-core v0.4.5
+#50 22.33    Compiling futures v0.3.31
+#50 23.20    Compiling idna_adapter v1.2.1
+#50 23.27    Compiling idna v1.1.0
+#50 24.07    Compiling url v2.5.8
+#50 25.77 error: failed to run custom build command for `rdkafka-sys v4.10.0+2.12.1`
+#50 25.77 
+#50 25.77 Caused by:
+#50 25.77   process didn't exit successfully: `/app/target/release/build/rdkafka-sys-273a0a637c9fd14f/build-script-build` (exit status: 101)
+#50 25.77   --- stdout
+#50 25.77   Configuring and compiling librdkafka
+#50 25.77   CMAKE_TOOLCHAIN_FILE_x86_64-unknown-linux-gnu = None
+#50 25.77   CMAKE_TOOLCHAIN_FILE_x86_64_unknown_linux_gnu = None
+#50 25.77   HOST_CMAKE_TOOLCHAIN_FILE = None
+#50 25.77   CMAKE_TOOLCHAIN_FILE = None
+#50 25.77   CMAKE_GENERATOR_x86_64-unknown-linux-gnu = None
+#50 25.77   CMAKE_GENERATOR_x86_64_unknown_linux_gnu = None
+#50 25.77   HOST_CMAKE_GENERATOR = None
+#50 25.77   CMAKE_GENERATOR = None
+#50 25.77   CMAKE_PREFIX_PATH_x86_64-unknown-linux-gnu = None
+#50 25.77   CMAKE_PREFIX_PATH_x86_64_unknown_linux_gnu = None
+#50 25.77   HOST_CMAKE_PREFIX_PATH = None
+#50 25.77   CMAKE_PREFIX_PATH = None
+#50 25.77   CMAKE_x86_64-unknown-linux-gnu = None
+#50 25.77   CMAKE_x86_64_unknown_linux_gnu = None
+#50 25.77   HOST_CMAKE = None
+#50 25.77   CMAKE = None
+#50 25.77   -- The C compiler identification is GNU 14.2.0
+#50 25.77   -- The CXX compiler identification is GNU 14.2.0
+#50 25.77   -- Detecting C compiler ABI info
+#50 25.77   -- Detecting C compiler ABI info - done
+#50 25.77   -- Check for working C compiler: /usr/bin/cc - skipped
+#50 25.77   -- Detecting C compile features
+#50 25.77   -- Detecting C compile features - done
+#50 25.77   -- Detecting CXX compiler ABI info
+#50 25.77   -- Detecting CXX compiler ABI info - done
+#50 25.77   -- Check for working CXX compiler: /usr/bin/c++ - skipped
+#50 25.77   -- Detecting CXX compile features
+#50 25.77   -- Detecting CXX compile features - done
+#50 25.77   -- Looking for pow in m
+#50 25.77   -- Looking for pow in m - found
+#50 25.77   -- Checking for module 'libsasl2'
+#50 25.77   --   Package 'libsasl2', required by 'virtual:world', not found
+#50 25.77   -- Found ZLIB: /app/target/release/build/libz-sys-ce33adc57befeed9/out/lib/libz.a (found version "1.3.1")
+#50 25.77   -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+#50 25.77   -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+#50 25.77   -- Found Threads: TRUE
+#50 25.77   -- Configuring done (4.1s)
+#50 25.77   -- Generating done (0.1s)
+#50 25.77   -- Build files have been written to: /app/target/release/build/rdkafka-sys-62a44671e271c366/out/build
+#50 25.77   [  1%] Building C object src/CMakeFiles/rdkafka.dir/rdaddr.c.o
+#50 25.77   [  2%] Building C object src/CMakeFiles/rdkafka.dir/rdbuf.c.o
+#50 25.77   [  3%] Building C object src/CMakeFiles/rdkafka.dir/rdavl.c.o
+#50 25.77   [  5%] Building C object src/CMakeFiles/rdkafka.dir/rdfnv1a.c.o
+#50 25.77   [  5%] Building C object src/CMakeFiles/rdkafka.dir/crc32c.c.o
+#50 25.77   [  6%] Building C object src/CMakeFiles/rdkafka.dir/rdcrc32.c.o
+#50 25.77   [  7%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka.c.o
+#50 25.77   [  8%] Building C object src/CMakeFiles/rdkafka.dir/rdbase64.c.o
+#50 25.77   [  9%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_assignor.c.o
+#50 25.77   [ 10%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_buf.c.o
+#50 25.77   [ 11%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_broker.c.o
+#50 25.77   [ 12%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_cgrp.c.o
+#50 25.77   [ 13%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_conf.c.o
+#50 25.77   [ 14%] Building C object src/CMakeFiles/rdkafka.dir/rdkafka_event.c.o
+#50 25.77 
+#50 25.77   --- stderr
+#50 25.77   Building and linking librdkafka statically
+#50 25.77   running: cd "/app/target/release/build/rdkafka-sys-62a44671e271c366/out/build" && CMAKE_PREFIX_PATH="/app/target/release/build/libz-sys-ce33adc57befeed9/out:" LC_ALL="C" "cmake" "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rdkafka-sys-4.10.0+2.12.1/librdkafka" "-B" "/app/target/release/build/rdkafka-sys-62a44671e271c366/out/build" "-DRDKAFKA_BUILD_STATIC=1" "-DRDKAFKA_BUILD_TESTS=0" "-DRDKAFKA_BUILD_EXAMPLES=0" "-DCMAKE_INSTALL_LIBDIR=lib" "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" "-DWITH_ZLIB=1" "-DWITH_CURL=0" "-DWITH_SSL=0" "-DWITH_SASL=0" "-DWITH_ZSTD=0" "-DENABLE_LZ4_EXT=0" "-DCMAKE_INSTALL_PREFIX=/app/target/release/build/rdkafka-sys-62a44671e271c366/out" "-DCMAKE_C_FLAGS= -ffunction-sections -fdata-sections -fPIC -m64 -w" "-DCMAKE_C_COMPILER=/usr/bin/cc" "-DCMAKE_CXX_FLAGS= -ffunction-sections -fdata-sections -fPIC -m64 -w" "-DCMAKE_CXX_COMPILER=/usr/bin/c++" "-DCMAKE_ASM_FLAGS= -ffunction-sections -fdata-sections -fPIC -m64 -w" "-DCMAKE_ASM_COMPILER=/usr/bin/cc" "-DCMAKE_BUILD_TYPE=Release"
+#50 25.77   CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+#50 25.77     Compatibility with CMake < 3.10 will be removed from a future version of
+#50 25.77     CMake.
+#50 25.77 
+#50 25.77     Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+#50 25.77     to tell CMake that the project requires at least <min> but has been updated
+#50 25.77     to work with policies introduced by <max> or earlier.
+#50 25.77 
+#50 25.77 
+#50 25.77   CMake Warning:
+#50 25.77     Manually-specified variables were not used by the project:
+#50 25.77 
+#50 25.77       CMAKE_ASM_COMPILER
+#50 25.77       CMAKE_ASM_FLAGS
+#50 25.77       CMAKE_POLICY_VERSION_MINIMUM
+#50 25.77 
+#50 25.77 
+#50 25.77   running: cd "/app/target/release/build/rdkafka-sys-62a44671e271c366/out/build" && LC_ALL="C" MAKEFLAGS="-j --jobserver-fds=9,10 --jobserver-auth=9,10" "cmake" "--build" "/app/target/release/build/rdkafka-sys-62a44671e271c366/out/build" "--target" "install" "--config" "Release"
+#50 25.77   /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rdkafka-sys-4.10.0+2.12.1/librdkafka/src/rdkafka_conf.c:60:10: fatal error: curl/curl.h: No such file or directory
+#50 25.77      60 | #include <curl/curl.h>
+#50 25.77         |          ^~~~~~~~~~~~~
+#50 25.77   compilation terminated.
+#50 25.77   gmake[2]: *** [src/CMakeFiles/rdkafka.dir/build.make:247: src/CMakeFiles/rdkafka.dir/rdkafka_conf.c.o] Error 1
+#50 25.77   gmake[2]: *** Waiting for unfinished jobs....
+#50 25.77   gmake[1]: *** [CMakeFiles/Makefile2:129: src/CMakeFiles/rdkafka.dir/all] Error 2
+#50 25.77   gmake: *** [Makefile:136: all] Error 2
+#50 25.77 
+#50 25.77   thread 'main' (1512) panicked at /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cmake-0.1.57/src/lib.rs:1132:5:
+#50 25.77 
+#50 25.77   command did not execute successfully, got: exit status: 2
+#50 25.77 
+#50 25.77   build script failed, must exit now
+#50 25.77   note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+#50 25.77 warning: build failed, waiting for other jobs to finish...
+#50 ERROR: process "/bin/sh -c cargo build --release" did not complete successfully: exit code: 101
+------
+ > [ingestion-service builder 6/6] RUN cargo build --release:
+29.18   gmake[1]: *** [CMakeFiles/Makefile2:129: src/CMakeFiles/rdkafka.dir/all] Error 2
+29.18   gmake: *** [Makefile:136: all] Error 2
+29.18 
+29.18   thread 'main' (1795) panicked at /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cmake-0.1.57/src/lib.rs:1132:5:
+29.18 
+29.18   command did not execute successfully, got: exit status: 2
+29.18 
+29.18   build script failed, must exit now
+29.18   note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+29.18 warning: build failed, waiting for other jobs to finish...
+------
+------
+ > [flash-sale-service builder 6/6] RUN cargo build --release:
+25.77   gmake[1]: *** [CMakeFiles/Makefile2:129: src/CMakeFiles/rdkafka.dir/all] Error 2
+25.77   gmake: *** [Makefile:136: all] Error 2
+25.77 
+25.77   thread 'main' (1512) panicked at /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cmake-0.1.57/src/lib.rs:1132:5:
+25.77 
+25.77   command did not execute successfully, got: exit status: 2
+25.77 
+25.77   build script failed, must exit now
+25.77   note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+25.77 warning: build failed, waiting for other jobs to finish...
+------
+Dockerfile:21
+
+--------------------
+
+  19 |     
+
+  20 |     # Build with full optimizations
+
+  21 | >>> RUN cargo build --release
+
+  22 |     
+
+  23 |     # Runtime stage - minimal image
+
+--------------------
+
+target ingestion-service: failed to solve: process "/bin/sh -c cargo build --release" did not complete successfully: exit code: 101
+

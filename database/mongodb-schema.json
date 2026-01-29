@@ -1,0 +1,26 @@
+{
+  "_id": "ObjectId(auto-generated)",
+  "transaction_id": "TXN-20260130-ABC123XYZ",
+  "booking_ref": "BK-DEF456",
+  "user_id": 12345,
+  "event_id": 789,
+  "seat_id": 1024,
+  "action": "attempt_lock",
+  "status": "success",
+  "service": "rust-axum",
+  "timestamp": "ISODate(2026-01-30T14:23:45.123Z)",
+  "latency_ms": 12,
+  "metadata": {
+    "ip_address": "192.168.1.100",
+    "user_agent": "Mozilla/5.0...",
+    "error_message": null,
+    "redis_key": "lock:event:789:seat:1024",
+    "ttl_remaining": 300,
+    "retry_count": 0,
+    "request_payload": {
+      "seat_number": "A12",
+      "zone": "VIP"
+    }
+  }
+}
+

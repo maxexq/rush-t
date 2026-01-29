@@ -1,0 +1,9 @@
+kafka:
+  brokers: "kafka:9092"
+  topics: "ticket_bookings,system_events"
+  group_id: "logger-service-group"
+
+mongodb:
+  uri: "mongodb://mongodb:27017"
+  database: "ticketrush_audit"
+
