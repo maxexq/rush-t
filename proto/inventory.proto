@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package inventory;
+
+service InventoryService {
+  rpc SetEventQuota(SetQuotaRequest) returns (SetQuotaResponse);
+}
+
+message SetQuotaRequest {
+  string event_id = 1;
+  int32 quota = 2;
+}
+
+message SetQuotaResponse {
+  bool success = 1;
+  string message = 2;
+}
+

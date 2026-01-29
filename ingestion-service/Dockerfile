@@ -1,5 +1,5 @@
 # Multi-stage build for high-performance ingestion service
-FROM rust:1.84-slim as builder
+FROM rustlang/rust:nightly-slim as builder
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \

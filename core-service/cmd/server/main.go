@@ -5,6 +5,7 @@ import (
 	"core-service/internal/handlers"
 	"core-service/internal/repository"
 	"core-service/internal/services"
+	"core-service/internal/websocket"
 	"core-service/pkg/kafka"
 	"log"
 	"os"
@@ -39,12 +40,20 @@ func main() {
 	bookingRepo := repository.NewBookingRepository(db)
 
 	// Initialize services
-	eventService := services.NewEventService(eventRepo)
+	grpcAddr := getEnv("GRPC_INVENTORY_ADDR", "localhost:50051")
+	eventService := services.NewEventService(eventRepo, grpcAddr)
 	bookingService := services.NewBookingService(bookingRepo)
 
 	// Initialize handlers
 	eventHandler := handlers.NewEventHandler(eventService)
 	bookingHandler := handlers.NewBookingHandler(bookingService)
+
+	// Initialize WebSocket Hub
+	hub := websocket.NewHub()
+	go hub.Run()
+	log.Println("[WS] Hub started")
+
+	wsHandler := websocket.NewHandler(hub)
 
 	// Initialize Kafka consumer
 	kafkaBrokers := getEnv("KAFKA_BROKERS", "localhost:9092")
@@ -59,6 +68,7 @@ func main() {
 		kafkaGroupID,
 		kafkaTopic,
 		bookingService,
+		hub,
 	)
 	if err != nil {
 		log.Printf("[Kafka] Warning: Failed to create consumer (will run without Kafka): %v", err)
@@ -92,10 +102,21 @@ func main() {
 	events := v1.Group("/events")
 	events.Get("/", eventHandler.GetEvents)
 	events.Get("/:id", eventHandler.GetEvent)
+	
+	// Admin route to initialize quota via gRPC
+	events.Post("/initialize-quota", eventHandler.InitializeQuota)
 
 	// User booking routes
 	users := v1.Group("/users")
 	users.Get("/:id/bookings", bookingHandler.GetUserBookings)
+
+	// WebSocket route for real-time updates
+	app.Get("/ws/events/:id", wsHandler.Upgrade())
+
+	// Debug: Hub stats endpoint
+	app.Get("/ws/stats", func(c *fiber.Ctx) error {
+		return c.JSON(hub.GetStats())
+	})
 
 	// Start server in goroutine
 	port := getEnv("PORT", "3000")

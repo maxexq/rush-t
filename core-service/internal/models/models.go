@@ -77,8 +77,9 @@ type Payment struct {
 
 // Kafka message structure
 type TicketReservationMessage struct {
-	SeatID int64  `json:"seat_id"`
-	UserID int64  `json:"user_id"`
-	Status string `json:"status"`
+	EventID int64  `json:"event_id"`
+	SeatID  int64  `json:"seat_id"`
+	UserID  int64  `json:"user_id"`
+	Status  string `json:"status"` // "reserved", "expired", "confirmed", "cancelled"
 }
 

@@ -11,13 +11,18 @@ import (
 	"github.com/IBM/sarama"
 )
 
+type WebSocketHub interface {
+	Broadcast(eventID int64, messageType string, data interface{})
+}
+
 type Consumer struct {
 	consumer       sarama.ConsumerGroup
 	bookingService *services.BookingService
+	hub            WebSocketHub
 	topic          string
 }
 
-func NewConsumer(brokers []string, groupID, topic string, bookingService *services.BookingService) (*Consumer, error) {
+func NewConsumer(brokers []string, groupID, topic string, bookingService *services.BookingService, hub WebSocketHub) (*Consumer, error) {
 	config := sarama.NewConfig()
 	config.Consumer.Group.Rebalance.Strategy = sarama.BalanceStrategyRoundRobin
 	config.Consumer.Offsets.Initial = sarama.OffsetNewest
@@ -30,6 +35,7 @@ func NewConsumer(brokers []string, groupID, topic string, bookingService *servic
 	return &Consumer{
 		consumer:       consumer,
 		bookingService: bookingService,
+		hub:            hub,
 		topic:          topic,
 	}, nil
 }
@@ -37,6 +43,7 @@ func NewConsumer(brokers []string, groupID, topic string, bookingService *servic
 func (c *Consumer) Start(ctx context.Context) {
 	handler := &consumerGroupHandler{
 		bookingService: c.bookingService,
+		hub:            c.hub,
 	}
 
 	go func() {
@@ -62,6 +69,7 @@ func (c *Consumer) Close() error {
 
 type consumerGroupHandler struct {
 	bookingService *services.BookingService
+	hub            WebSocketHub
 }
 
 func (h *consumerGroupHandler) Setup(sarama.ConsumerGroupSession) error {
@@ -88,6 +96,13 @@ func (h *consumerGroupHandler) ConsumeClaim(session sarama.ConsumerGroupSession,
 		if err := h.bookingService.ProcessReservation(session.Context(), &msg); err != nil {
 			log.Printf("[Kafka] Failed to process reservation: %v", err)
 			// In production, you might want to push to a DLQ or retry queue
+		}
+
+		// Broadcast to WebSocket clients if hub is available
+		if h.hub != nil {
+			// Determine event_id from the message (needs to be added to TicketReservationMessage)
+			// For now, broadcasting the seat status update
+			h.hub.Broadcast(msg.EventID, msg.Status, msg)
 		}
 
 		session.MarkMessage(message, "")

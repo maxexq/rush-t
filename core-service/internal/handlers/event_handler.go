@@ -3,6 +3,7 @@ package handlers
 import (
 	"core-service/internal/models"
 	"core-service/internal/services"
+	"fmt"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -39,4 +40,30 @@ func (h *EventHandler) GetEvent(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(event)
+}
+
+// InitializeQuota is the Admin endpoint to warm up Redis cache via gRPC
+func (h *EventHandler) InitializeQuota(c *fiber.Ctx) error {
+	var req struct {
+		EventID string `json:"event_id"`
+		Quota   int    `json:"quota"`
+	}
+
+	if err := c.BodyParser(&req); err != nil {
+		return c.Status(400).JSON(fiber.Map{"error": "Invalid request body"})
+	}
+
+	if req.EventID == "" || req.Quota <= 0 {
+		return c.Status(400).JSON(fiber.Map{"error": "event_id and quota (>0) are required"})
+	}
+
+	err := h.service.InitializeEventQuota(req.EventID, req.Quota)
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	return c.JSON(fiber.Map{
+		"success": true,
+		"message": fmt.Sprintf("Quota %d initialized for event %s", req.Quota, req.EventID),
+	})
 }
