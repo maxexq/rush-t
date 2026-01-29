@@ -115,8 +115,12 @@ services:
     restart: always
     depends_on:
       - postgres
+      - kafka
     environment:
       DATABASE_URL: postgres://admin:password123@postgres:5432/ticket_db
+      KAFKA_BROKERS: kafka:29092
+      KAFKA_TOPIC: ticket_bookings
+      KAFKA_GROUP_ID: core-service-group
     ports:
       - "3000:3000"
     networks:
