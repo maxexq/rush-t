@@ -175,6 +175,25 @@ services:
         soft: 1000000
         hard: 1000000
 
+  # ---------------------------------------------------
+  # 10. Go Logger Service (Audit & Monitoring)
+  # ---------------------------------------------------
+  logger-service:
+    build: ../logger-service
+    container_name: ticket_logger
+    restart: always
+    depends_on:
+      - kafka
+      - mongo
+    environment:
+      KAFKA_BROKERS: "kafka:29092"
+      KAFKA_TOPICS: "ticket_bookings,system_events"
+      KAFKA_GROUP_ID: "logger-service-group"
+      MONGODB_URI: "mongodb://admin:password123@mongo:27017"
+      MONGODB_DATABASE: "ticketrush_audit"
+    networks:
+      - ticket-network
+
 volumes:
   postgres_data:
   redis_data:

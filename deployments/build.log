@@ -1,0 +1,1 @@
+time="2026-01-30T02:21:52+07:00" level=warning msg="E:\\Dev\\rush-t\\deployments\\docker-compose.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
