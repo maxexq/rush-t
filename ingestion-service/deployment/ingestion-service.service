@@ -1,0 +1,41 @@
+[Unit]
+Description=High-Throughput Ingestion Service
+After=network.target kafka.service
+Wants=kafka.service
+
+[Service]
+Type=simple
+User=ingestion
+Group=ingestion
+WorkingDirectory=/opt/ingestion-service
+
+# Binary location
+ExecStart=/opt/ingestion-service/bin/ingestion-service
+
+# Environment variables
+Environment="RUST_LOG=ingestion_service=info,tower_http=info"
+EnvironmentFile=/etc/ingestion-service/config.env
+
+# Performance tuning
+LimitNOFILE=1000000
+LimitNPROC=64000
+
+# Security hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/log/ingestion-service
+
+# Restart policy
+Restart=always
+RestartSec=10
+
+# Graceful shutdown
+TimeoutStopSec=30
+KillMode=mixed
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target
+

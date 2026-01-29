@@ -110,7 +110,7 @@ services:
   # 7. Go Core Service
   # ---------------------------------------------------
   core-service:
-    build: ./core-service
+    build: ../core-service
     container_name: ticket_core_service
     restart: always
     depends_on:
@@ -125,6 +125,55 @@ services:
       - "3000:3000"
     networks:
       - ticket-network
+
+  # ---------------------------------------------------
+  # 8. Rust Flash Sale Service (High-Performance Locking)
+  # ---------------------------------------------------
+  flash-sale-service:
+    build: ../flash-sale-service
+    container_name: ticket_flash_sale
+    restart: always
+    depends_on:
+      - redis
+      - kafka
+    environment:
+      SERVER_HOST: "0.0.0.0"
+      SERVER_PORT: "8081"
+      REDIS_URL: "redis://redis:6379"
+      KAFKA_BROKERS: "kafka:29092"
+      KAFKA_TOPIC: "booking.events"
+      LOCK_TTL_MS: "300000"
+      RUST_LOG: "flash_sale_service=info"
+    ports:
+      - "8081:8081"
+    networks:
+      - ticket-network
+
+  # ---------------------------------------------------
+  # 9. Rust Ingestion Service (100k+ Concurrent Handling)
+  # ---------------------------------------------------
+  ingestion-service:
+    build: ../ingestion-service
+    container_name: ticket_ingestion
+    restart: always
+    depends_on:
+      - kafka
+    environment:
+      SERVER_HOST: "0.0.0.0"
+      SERVER_PORT: "8082"
+      KAFKA_BROKERS: "kafka:29092"
+      KAFKA_TOPIC: "ingestion.events"
+      KAFKA_TIMEOUT_MS: "1000"
+      MAX_CONCURRENT_REQUESTS: "100000"
+      RUST_LOG: "ingestion_service=info,tower_http=info"
+    ports:
+      - "8082:8082"
+    networks:
+      - ticket-network
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
 
 volumes:
   postgres_data:
