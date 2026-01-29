@@ -1,8 +1,8 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 // Base URLs for services
-const CORE_SERVICE_URL = process.env.NEXT_PUBLIC_CORE_SERVICE_URL || 'http://localhost:8080/api/v1';
-const FLASH_SALE_URL = process.env.NEXT_PUBLIC_FLASH_SALE_URL || 'http://localhost:3000/api/v1';
+const CORE_SERVICE_URL = process.env.NEXT_PUBLIC_CORE_SERVICE_URL || 'http://localhost:3000/api/v1';
+const FLASH_SALE_URL = process.env.NEXT_PUBLIC_FLASH_SALE_URL || 'http://localhost:8081/api/v1';
 
 // Core Service API (Go) - Events, Users, Orders
 export const coreApi = axios.create({

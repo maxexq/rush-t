@@ -73,23 +73,12 @@ async fn main() {
 
     tracing::info!("Listening on {}", config.server_addr());
 
-    // Use axum::serve with custom HTTP/2 configuration
-    // WHY HTTP/2: Multiplexing allows thousands of concurrent streams over fewer TCP connections
-    // WHY keep_alive: Prevents silent connection deaths, allows reuse
-    // WHY max_concurrent_streams: Limits per-connection streams to prevent DoS
+    // Use axum::serve with graceful shutdown
     axum::serve(
         listener,
         app.into_make_service_with_connect_info::<std::net::SocketAddr>(),
     )
     .with_graceful_shutdown(shutdown_signal())
-    // TCP settings for high concurrency
-    .tcp_nodelay(true) // Disable Nagle's algorithm for lower latency
-    .tcp_keepalive(Some(Duration::from_secs(60))) // Keep TCP connections alive
-    .http2_keep_alive_interval(Some(Duration::from_secs(20))) // HTTP/2 ping frames
-    .http2_keep_alive_timeout(Duration::from_secs(10))
-    .http2_max_concurrent_streams(Some(1000)) // Limit streams per connection
-    .http2_max_frame_size(Some(16384)) // Default frame size
-    .http2_max_header_list_size(Some(16384)) // Limit header size
     .await
     .expect("Server failed");
 }

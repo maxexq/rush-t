@@ -11,6 +11,9 @@ pub enum AppError {
     #[error("Redis error: {0}")]
     Redis(#[from] deadpool_redis::PoolError),
 
+    #[error("Redis pool creation error: {0}")]
+    RedisPoolCreate(String),
+
     #[error("Redis command error: {0}")]
     RedisCmd(#[from] redis::RedisError),
 
@@ -32,7 +35,7 @@ impl IntoResponse for AppError {
         let (status, error_message) = match self {
             AppError::SeatTaken => (StatusCode::CONFLICT, "Seat already reserved"),
             AppError::BadRequest(ref msg) => (StatusCode::BAD_REQUEST, msg.as_str()),
-            AppError::Redis(_) | AppError::RedisCmd(_) | AppError::Kafka(_) => {
+            AppError::Redis(_) | AppError::RedisPoolCreate(_) | AppError::RedisCmd(_) | AppError::Kafka(_) => {
                 tracing::error!("Internal error: {}", self);
                 (StatusCode::INTERNAL_SERVER_ERROR, "Internal server error")
             }

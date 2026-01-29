@@ -150,7 +150,7 @@ function PaymentContent() {
               <div className="flex items-center gap-2 text-muted-foreground">
                 <MapPin className="h-4 w-4" />
                 <span>
-                  {event.venue}, {event.city}
+                  {typeof event.venue === 'string' ? event.venue : event.venue.name}, {event.city}
                 </span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
@@ -500,7 +500,9 @@ function PaymentContent() {
               <div className="space-y-4 mb-6">
                 <div>
                   <p className="font-medium">{event.title}</p>
-                  <p className="text-sm text-muted-foreground">{event.venue}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {typeof event.venue === 'string' ? event.venue : event.venue.name}
+                  </p>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Calendar className="h-4 w-4" />

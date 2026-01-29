@@ -20,21 +20,70 @@ INSERT INTO events (id, venue_id, title, description, event_date, doors_open, st
 (3, 3, 'Indie Concert Series', 'Featuring emerging indie artists', '2026-08-10 21:00:00', '2026-08-10 19:00:00', 'UPCOMING', 9000, 9000)
 ON CONFLICT (id) DO NOTHING;
 
--- Insert seats for event 1
-INSERT INTO seats (event_id, seat_number, row_label, zone, base_price, status) VALUES
-(1, 'A1', 'A', 'VIP', 299.99, 'AVAILABLE'),
-(1, 'A2', 'A', 'VIP', 299.99, 'AVAILABLE'),
-(1, 'B1', 'B', 'General', 99.99, 'AVAILABLE'),
-(1, 'B2', 'B', 'General', 99.99, 'AVAILABLE'),
-(1, 'C1', 'C', 'General', 79.99, 'AVAILABLE')
-ON CONFLICT (event_id, seat_number) DO NOTHING;
+-- Generate concert seats for event 1 and 2
+DO $$
+DECLARE
+    event_id_val INT;
+    section_name TEXT;
+    row_name TEXT;
+    seat_num INT;
+    section_price DECIMAL(10,2);
+BEGIN
+    -- Event 1 and 2 concert seating
+    FOR event_id_val IN 1..2 LOOP
+        -- VIP Section (8 rows x 10 seats)
+        FOR row_name IN SELECT chr(i) FROM generate_series(65, 72) i LOOP
+            FOR seat_num IN 1..10 LOOP
+                INSERT INTO seats (event_id, seat_number, row_label, zone, base_price, status)
+                VALUES (event_id_val, seat_num::TEXT, row_name, 'VIP', 350, 'AVAILABLE')
+                ON CONFLICT (event_id, seat_number) DO NOTHING;
+            END LOOP;
+        END LOOP;
 
--- Insert seats for event 2
-INSERT INTO seats (event_id, seat_number, row_label, zone, base_price, status) VALUES
-(2, 'A1', 'A', 'Premium', 199.99, 'AVAILABLE'),
-(2, 'A2', 'A', 'Premium', 199.99, 'AVAILABLE'),
-(2, 'B1', 'B', 'Standard', 89.99, 'AVAILABLE')
-ON CONFLICT (event_id, seat_number) DO NOTHING;
+        -- Section A (8 rows x 12 seats)
+        FOR row_name IN SELECT chr(i) FROM generate_series(65, 72) i LOOP
+            FOR seat_num IN 1..12 LOOP
+                INSERT INTO seats (event_id, seat_number, row_label, zone, base_price, status)
+                VALUES (event_id_val, seat_num::TEXT, row_name, 'A', 200, 'AVAILABLE')
+                ON CONFLICT (event_id, seat_number) DO NOTHING;
+            END LOOP;
+        END LOOP;
+
+        -- Section B (8 rows x 12 seats)
+        FOR row_name IN SELECT chr(i) FROM generate_series(65, 72) i LOOP
+            FOR seat_num IN 1..12 LOOP
+                INSERT INTO seats (event_id, seat_number, row_label, zone, base_price, status)
+                VALUES (event_id_val, seat_num::TEXT, row_name, 'B', 150, 'AVAILABLE')
+                ON CONFLICT (event_id, seat_number) DO NOTHING;
+            END LOOP;
+        END LOOP;
+
+        -- Section C (8 rows x 12 seats)
+        FOR row_name IN SELECT chr(i) FROM generate_series(65, 72) i LOOP
+            FOR seat_num IN 1..12 LOOP
+                INSERT INTO seats (event_id, seat_number, row_label, zone, base_price, status)
+                VALUES (event_id_val, seat_num::TEXT, row_name, 'C', 120, 'AVAILABLE')
+                ON CONFLICT (event_id, seat_number) DO NOTHING;
+            END LOOP;
+        END LOOP;
+
+        -- Section D (8 rows x 14 seats)
+        FOR row_name IN SELECT chr(i) FROM generate_series(65, 72) i LOOP
+            FOR seat_num IN 1..14 LOOP
+                INSERT INTO seats (event_id, seat_number, row_label, zone, base_price, status)
+                VALUES (event_id_val, seat_num::TEXT, row_name, 'D', 80, 'AVAILABLE')
+                ON CONFLICT (event_id, seat_number) DO NOTHING;
+            END LOOP;
+        END LOOP;
+    END LOOP;
+
+    -- Event 3: Simple general admission
+    FOR seat_num IN 1..100 LOOP
+        INSERT INTO seats (event_id, seat_number, row_label, zone, base_price, status)
+        VALUES (3, seat_num::TEXT, 'GA', 'General', 75, 'AVAILABLE')
+        ON CONFLICT (event_id, seat_number) DO NOTHING;
+    END LOOP;
+END $$;
 
 SELECT setval('venues_id_seq', (SELECT MAX(id) FROM venues));
 SELECT setval('events_id_seq', (SELECT MAX(id) FROM events));

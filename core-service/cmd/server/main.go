@@ -38,15 +38,18 @@ func main() {
 	// Initialize repositories
 	eventRepo := repository.NewEventRepository(db)
 	bookingRepo := repository.NewBookingRepository(db)
+	seatRepo := repository.NewSeatRepository(db)
 
 	// Initialize services
 	grpcAddr := getEnv("GRPC_INVENTORY_ADDR", "localhost:50051")
 	eventService := services.NewEventService(eventRepo, grpcAddr)
 	bookingService := services.NewBookingService(bookingRepo)
+	seatService := services.NewSeatService(seatRepo)
 
 	// Initialize handlers
 	eventHandler := handlers.NewEventHandler(eventService)
 	bookingHandler := handlers.NewBookingHandler(bookingService)
+	seatHandler := handlers.NewSeatHandler(seatService)
 
 	// Initialize WebSocket Hub
 	hub := websocket.NewHub()
@@ -102,6 +105,7 @@ func main() {
 	events := v1.Group("/events")
 	events.Get("/", eventHandler.GetEvents)
 	events.Get("/:id", eventHandler.GetEvent)
+	events.Get("/:id/seats", seatHandler.GetEventSeats)
 	
 	// Admin route to initialize quota via gRPC
 	events.Post("/initialize-quota", eventHandler.InitializeQuota)

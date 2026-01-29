@@ -305,7 +305,9 @@ export function filterEvents(
     const matchesSearch =
       search === "" ||
       event.title.toLowerCase().includes(search.toLowerCase()) ||
-      event.venue.toLowerCase().includes(search.toLowerCase());
+      (typeof event.venue === 'string' 
+        ? event.venue.toLowerCase().includes(search.toLowerCase())
+        : event.venue.name.toLowerCase().includes(search.toLowerCase()));
 
     return matchesCategory && matchesCity && matchesType && matchesSearch;
   });

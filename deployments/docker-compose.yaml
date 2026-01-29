@@ -1,5 +1,3 @@
-version: '3.8'
-
 networks:
   ticket-network:
     driver: bridge
@@ -110,7 +108,9 @@ services:
   # 7. Go Core Service
   # ---------------------------------------------------
   core-service:
-    build: ../core-service
+    build:
+      context: ..
+      dockerfile: core-service/Dockerfile
     container_name: ticket_core_service
     restart: always
     depends_on:
@@ -130,7 +130,9 @@ services:
   # 8. Rust Flash Sale Service (High-Performance Locking)
   # ---------------------------------------------------
   flash-sale-service:
-    build: ../flash-sale-service
+    build:
+      context: ..
+      dockerfile: flash-sale-service/Dockerfile
     container_name: ticket_flash_sale
     restart: always
     depends_on:
@@ -153,7 +155,9 @@ services:
   # 9. Rust Ingestion Service (100k+ Concurrent Handling)
   # ---------------------------------------------------
   ingestion-service:
-    build: ../ingestion-service
+    build:
+      context: ..
+      dockerfile: ingestion-service/Dockerfile
     container_name: ticket_ingestion
     restart: always
     depends_on:
@@ -179,7 +183,9 @@ services:
   # 10. Go Logger Service (Audit & Monitoring)
   # ---------------------------------------------------
   logger-service:
-    build: ../logger-service
+    build:
+      context: ..
+      dockerfile: logger-service/Dockerfile
     container_name: ticket_logger
     restart: always
     depends_on:
@@ -191,6 +197,27 @@ services:
       KAFKA_GROUP_ID: "logger-service-group"
       MONGODB_URI: "mongodb://admin:password123@mongo:27017"
       MONGODB_DATABASE: "ticketrush_audit"
+    networks:
+      - ticket-network
+
+  # ---------------------------------------------------
+  # 11. Next.js Frontend
+  # ---------------------------------------------------
+  frontend:
+    build:
+      context: ..
+      dockerfile: frontend/Dockerfile
+    container_name: ticket_frontend
+    restart: always
+    depends_on:
+      - core-service
+      - flash-sale-service
+    environment:
+      NEXT_PUBLIC_CORE_SERVICE_URL: "http://localhost:3000/api/v1"
+      NEXT_PUBLIC_FLASH_SALE_URL: "http://localhost:8081/api/v1"
+      NEXT_PUBLIC_WS_URL: "ws://localhost:3000/ws"
+    ports:
+      - "3001:3001"
     networks:
       - ticket-network
 
