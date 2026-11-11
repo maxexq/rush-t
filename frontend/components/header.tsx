@@ -41,7 +41,8 @@ export function Header() {
                 "text-xs font-medium tracking-widest transition-colors hover:text-foreground",
                 pathname === item.href ||
                   (item.href.includes("?") &&
-                    pathname + window?.location?.search === item.href)
+                    typeof window !== 'undefined' &&
+                    pathname + window.location.search === item.href)
                   ? "text-foreground"
                   : "text-muted-foreground"
               )}

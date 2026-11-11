@@ -6,22 +6,23 @@ RUN apt-get update && apt-get install -y \
     cmake \
     g++ \
     libssl-dev \
+    libcurl4-openssl-dev \
     pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 # Copy manifests
-COPY Cargo.toml ./
+COPY ingestion-service/Cargo.toml ./
 
 # Copy source
-COPY src ./src
+COPY ingestion-service/src ./src
 
 # Build with full optimizations
 RUN cargo build --release
 
 # Runtime stage - minimal image
-FROM debian:bookworm-slim
+FROM rustlang/rust:nightly-slim
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y \

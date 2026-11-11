@@ -104,7 +104,7 @@ export function EventDetailClient({ eventId }: EventDetailClientProps) {
                 <div>
                   <p className="text-sm text-muted-foreground">Venue</p>
                   <p className="font-medium">
-                    {event.venue}, {event.city}
+                    {typeof event.venue === 'string' ? event.venue : event.venue.name}, {event.city}
                   </p>
                 </div>
               </div>
@@ -115,7 +115,7 @@ export function EventDetailClient({ eventId }: EventDetailClientProps) {
                 <div>
                   <p className="text-sm text-muted-foreground">Availability</p>
                   <p className="font-medium">
-                    {event.available_tickets.toLocaleString()} tickets left (
+                    {event.available_tickets?.toLocaleString()} tickets left (
                     {ticketPercentage}%)
                   </p>
                 </div>
@@ -154,8 +154,12 @@ export function EventDetailClient({ eventId }: EventDetailClientProps) {
             <div className="aspect-video bg-secondary rounded-lg flex items-center justify-center mb-4">
               <span className="text-muted-foreground text-sm">Map View</span>
             </div>
-            <h3 className="font-medium mb-1">{event.venue}</h3>
-            <p className="text-muted-foreground text-sm">{event.city}</p>
+            <h3 className="font-medium mb-1">
+              {typeof event.venue === 'string' ? event.venue : event.venue.name}
+            </h3>
+            <p className="text-muted-foreground text-sm">
+              {typeof event.venue === 'object' && event.venue.address ? event.venue.address + ', ' : ''}{event.city}
+            </p>
           </div>
         </div>
 

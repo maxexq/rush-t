@@ -1,12 +1,21 @@
 // API Response Types
 
+export interface Venue {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
+  capacity: number;
+  created_at?: string;
+}
+
 export interface Event {
   id: string;
   title: string;
   description: string;
   date: string;
   time: string;
-  venue: string;
+  venue: string | Venue;
   city: string;
   category: string;
   type: 'concert' | 'general';
